@@ -1,0 +1,2134 @@
+\documentclass{article}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{longtable}
+\usepackage{pdflscape}
+\usepackage{threeparttable}
+\usepackage{graphicx}
+\usepackage{pgffor}
+\usepackage{subcaption}
+\usepackage{tabularx}
+\usepackage{ragged2e}
+\usepackage{caption}
+
+\title{Cryptocurrency Working Paper Tables}
+\author{C. Zhang}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{table}[htbp]
+\centering
+\caption{Overview of Selected Cryptocurrencies}
+\scriptsize
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{lllllp{4.2cm}}
+\hline
+\rule[-6pt]{0pt}{17pt}
+Code & Name & Launch Year & Approx.\ Market Cap & Blockchain & Main Feature \\
+\hline
+\noalign{\vskip 4pt}
+AAVE & Aave & 2017 & \$1--2B & Ethereum & DeFi lending and borrowing protocol with flash loans \\[4pt]
+
+ALGO & Algorand & 2019 & \$1--2B & Algorand & Pure Proof-of-Stake, high-speed and low-fee transactions \\[4pt]
+
+AVAX & Avalanche & 2020 & \$15--20B & Avalanche & High-throughput smart contracts, subnet architecture \\[4pt]
+
+BNB & BNB & 2017 & \$40--50B & BNB Chain & Exchange utility token and ecosystem gas token \\[4pt]
+
+BCH & Bitcoin Cash & 2017 & \$4--6B & Bitcoin Cash & Larger block size for faster, cheaper payments \\[4pt]
+
+BTC & Bitcoin & 2009 & \$800B--1T & Bitcoin & First cryptocurrency, store of value, Proof-of-Work security \\[4pt]
+
+ADA & Cardano & 2017 & \$15--20B & Cardano & Research-driven Proof-of-Stake blockchain \\[4pt]
+
+LINK & Chainlink & 2017 & \$10--15B & Ethereum & Decentralized oracle network connecting smart contracts to real-world data \\[4pt]
+
+CRO & Cronos & 2018 & \$3--5B & Cronos & Crypto.com ecosystem token \\[4pt]
+
+DOGE & Dogecoin & 2013 & \$15--25B & Dogecoin & Meme cryptocurrency with strong community support \\[4pt]
+
+ETC & Ethereum Classic & 2016 & \$3--5B & Ethereum Classic & Original Ethereum chain maintaining Proof-of-Work \\[4pt]
+
+ETH & Ethereum & 2015 & \$300--400B & Ethereum & Smart contract platform supporting DeFi and NFTs \\[4pt]
+
+FIL & Filecoin & 2020 & \$3--5B & Filecoin & Decentralized storage marketplace \\[4pt]
+
+HBAR & Hedera & 2019 & \$8--12B & Hedera Hashgraph & Hashgraph consensus with enterprise governance \\[4pt]
+
+KCS & KuCoin Token & 2017 & \$1--2B & Ethereum & Exchange token with revenue-sharing mechanism \\[4pt]
+
+XMR & Monero & 2014 & \$3--5B & Monero & Privacy-focused cryptocurrency with ring signatures \\[4pt]
+
+NEAR & NEAR Protocol & 2020 & \$5--8B & NEAR & Sharded Proof-of-Stake blockchain \\[4pt]
+
+OKB & OKB & 2019 & \$8--12B & OKX Chain & Utility token for OKX ecosystem \\[4pt]
+
+DOT & Polkadot & 2020 & \$8--12B & Polkadot & Interoperability through parachain architecture \\[4pt]
+
+QNT & Quant & 2018 & \$1--2B & Ethereum & Overledger protocol enabling cross-chain interoperability \\[4pt]
+
+RNDR & Render & 2020 & \$3--5B & Solana / Ethereum & Decentralized GPU rendering network \\[4pt]
+
+SOL & Solana & 2020 & \$70--90B & Solana & High-speed blockchain using Proof-of-History \\[4pt]
+
+XLM & Stellar & 2014 & \$3--5B & Stellar & Low-cost cross-border payments \\[4pt]
+
+TRX & TRON & 2017 & \$10--15B & TRON & High-throughput smart contract platform \\[4pt]
+
+UNI & Uniswap & 2020 & \$4--6B & Ethereum & Governance token for decentralized exchange \\[4pt]
+
+LEO & UNUS SED LEO & 2019 & \$3--5B & Ethereum & Utility token for Bitfinex ecosystem \\[4pt]
+
+VET & VeChain & 2018 & \$2--4B & VeChainThor & Supply chain and enterprise tracking solutions \\[4pt]
+
+ZEC & Zcash & 2016 & \$0.5--1B & Zcash & Privacy coin using zk-SNARK zero-knowledge proofs \\
+
+\hline
+\end{tabular}
+\end{table}
+
+
+\newgeometry{left=1.5cm,right=1.5cm} % Temporarily reduce left and right margins
+\begin{table}[htbp]
+\centering
+\caption{Descriptive statistics of cryptocurrency returns}
+\label{tab:coin_descriptive}
+\begin{adjustbox}{width=\textwidth}
+\begin{tabular}{lccccccccc}
+\toprule
+Coin & Mean & Med & Min & Max & Std. Dev. & Skew. & Kurt. & JB Test & ADF Test \\
+\midrule
+AAVE & $0.06$ & $0.02$ & $-40.67$ & $26.76$ & $5.78$ & $-0.02$ & $6.47$ & $9.74\times 10^{2}(0.00)\text{***}$ & $-12.22(0.01)\text{***}$ \\
+ADA & $0.05$ & $-0.05$ & $-29.78$ & $54.37$ & $5.05$ & $0.79$ & $13.19$ & $8.57\times 10^{3}(0.00)\text{***}$ & $-10.84(0.01)\text{***}$ \\
+ALGO & $-0.05$ & $0.07$ & $-35.76$ & $38.45$ & $5.41$ & $0.17$ & $8.08$ & $2.09\times 10^{3}(0.00)\text{***}$ & $-11.46(0.01)\text{***}$ \\
+AVAX & $0.05$ & $-0.01$ & $-45.08$ & $55.64$ & $6.03$ & $0.39$ & $11.24$ & $5.52\times 10^{3}(0.00)\text{***}$ & $-11.13(0.01)\text{***}$ \\
+BCH & $0.04$ & $0.01$ & $-42.54$ & $46.28$ & $4.87$ & $0.70$ & $16.29$ & $1.44\times 10^{4}(0.00)\text{***}$ & $-12.59(0.01)\text{***}$ \\
+BNB & $0.17$ & $0.16$ & $-39.03$ & $52.47$ & $4.17$ & $0.93$ & $25.76$ & $4.20\times 10^{4}(0.00)\text{***}$ & $-10.34(0.01)\text{***}$ \\
+BTC & $0.10$ & $0.04$ & $-17.09$ & $17.28$ & $3.06$ & $-0.10$ & $6.65$ & $1.08\times 10^{3}(0.00)\text{***}$ & $-11.20(0.01)\text{***}$ \\
+CRO & $-0.03$ & $-0.08$ & $-34.98$ & $51.82$ & $5.17$ & $0.83$ & $15.67$ & $1.32\times 10^{4}(0.00)\text{***}$ & $-10.78(0.01)\text{***}$ \\
+DOGE & $0.19$ & $-0.06$ & $-51.10$ & $147.19$ & $7.18$ & $5.39$ & $105.39$ & $8.55\times 10^{5}(0.00)\text{***}$ & $-11.65(0.01)\text{***}$ \\
+DOT & $-0.05$ & $-0.07$ & $-46.38$ & $32.97$ & $5.16$ & $-0.10$ & $10.87$ & $5.00\times 10^{3}(0.00)\text{***}$ & $-11.20(0.01)\text{***}$ \\
+ETC & $0.03$ & $-0.06$ & $-38.94$ & $35.88$ & $5.26$ & $0.61$ & $11.75$ & $6.29\times 10^{3}(0.00)\text{***}$ & $-12.75(0.01)\text{***}$ \\
+ETH & $0.10$ & $0.09$ & $-31.15$ & $24.09$ & $4.09$ & $-0.19$ & $8.00$ & $2.03\times 10^{3}(0.00)\text{***}$ & $-11.68(0.01)\text{***}$ \\
+FIL & $-0.19$ & $-0.20$ & $-41.47$ & $54.56$ & $5.94$ & $0.78$ & $15.27$ & $1.23\times 10^{4}(0.00)\text{***}$ & $-11.15(0.01)\text{***}$ \\
+HBAR & $0.06$ & $-0.05$ & $-41.50$ & $54.14$ & $5.81$ & $1.37$ & $16.15$ & $1.46\times 10^{4}(0.00)\text{***}$ & $-10.90(0.01)\text{***}$ \\
+KCS & $0.12$ & $0.04$ & $-50.86$ & $43.69$ & $4.68$ & $0.34$ & $20.37$ & $2.44\times 10^{4}(0.00)\text{***}$ & $-11.39(0.01)\text{***}$ \\
+LEO & $0.10$ & $0.12$ & $-25.62$ & $32.98$ & $2.74$ & $0.89$ & $24.86$ & $3.88\times 10^{4}(0.00)\text{***}$ & $-13.27(0.01)\text{***}$ \\
+LINK & $-0.00$ & $0.11$ & $-44.99$ & $28.06$ & $5.23$ & $-0.35$ & $7.82$ & $1.91\times 10^{3}(0.00)\text{***}$ & $-12.26(0.01)\text{***}$ \\
+LTC & $0.01$ & $0.13$ & $-43.50$ & $24.19$ & $4.57$ & $-0.65$ & $10.62$ & $4.82\times 10^{3}(0.00)\text{***}$ & $-12.94(0.01)\text{***}$ \\
+NEAR & $0.02$ & $-0.03$ & $-43.39$ & $35.48$ & $6.33$ & $0.14$ & $7.47$ & $1.62\times 10^{3}(0.00)\text{***}$ & $-12.42(0.01)\text{***}$ \\
+OKB & $0.15$ & $-0.10$ & $-40.16$ & $81.57$ & $5.29$ & $2.95$ & $46.85$ & $1.58\times 10^{5}(0.00)\text{***}$ & $-11.73(0.01)\text{***}$ \\
+QNT & $0.10$ & $-0.26$ & $-32.64$ & $34.13$ & $5.24$ & $0.67$ & $9.34$ & $3.38\times 10^{3}(0.00)\text{***}$ & $-12.67(0.01)\text{***}$ \\
+RNDR & $0.12$ & $-0.27$ & $-41.93$ & $49.50$ & $7.50$ & $0.60$ & $8.00$ & $2.13\times 10^{3}(0.00)\text{***}$ & $-10.81(0.01)\text{***}$ \\
+SOL & $0.20$ & $0.03$ & $-66.41$ & $35.86$ & $6.09$ & $-0.49$ & $14.83$ & $1.14\times 10^{4}(0.00)\text{***}$ & $-11.53(0.01)\text{***}$ \\
+TRX & $0.12$ & $0.16$ & $-37.98$ & $65.86$ & $4.06$ & $1.91$ & $49.27$ & $1.74\times 10^{5}(0.00)\text{***}$ & $-11.61(0.01)\text{***}$ \\
+UNI & $0.01$ & $-0.09$ & $-39.14$ & $43.56$ & $5.80$ & $0.62$ & $9.90$ & $3.96\times 10^{3}(0.00)\text{***}$ & $-12.14(0.01)\text{***}$ \\
+VET & $-0.01$ & $-0.02$ & $-40.34$ & $31.75$ & $5.49$ & $-0.00$ & $8.45$ & $2.39\times 10^{3}(0.00)\text{***}$ & $-11.48(0.01)\text{***}$ \\
+XDC & $0.11$ & $-0.21$ & $-57.01$ & $90.66$ & $5.87$ & $2.03$ & $44.31$ & $1.39\times 10^{5}(0.00)\text{***}$ & $-10.79(0.01)\text{***}$ \\
+XLM & $0.04$ & $-0.03$ & $-36.16$ & $55.34$ & $5.14$ & $1.86$ & $23.19$ & $3.40\times 10^{4}(0.00)\text{***}$ & $-11.42(0.01)\text{***}$ \\
+XMR & $0.06$ & $0.27$ & $-50.63$ & $30.93$ & $4.35$ & $-1.44$ & $24.09$ & $3.65\times 10^{4}(0.00)\text{***}$ & $-12.60(0.01)\text{***}$ \\
+ZEC & $0.08$ & $0.12$ & $-52.81$ & $48.22$ & $5.71$ & $-0.01$ & $11.69$ & $6.09\times 10^{3}(0.00)\text{***}$ & $-11.82(0.01)\text{***}$ \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\begin{flushleft}
+{\footnotesize
+\textit{Notes:} This table shows daily retrun statistics for different cryptocurrencies. Descriptive statistics are expressed as percentages. The sample period spans from 2020-10-18 to 2026-02-03. The ADF test (Dickey \& Fuller, 1979, 1981) is used to examine stationarity; a statistically significant test statistic indicates rejection of the null hypothesis of a unit root, implying that the series is stationary. The Jarque--Bera test is used to assess normality; a statistically significant result indicates rejection of the null hypothesis of normality, suggesting that the distribution exhibits non-normal skewness and/or kurtosis. ***, **, * indicate significance at the 1\%, 5\%, and 10\% levels.}
+\end{flushleft}
+\end{table}
+\restoregeometry % Restore the original page margins
+
+
+% up optim result table
+\begin{landscape}
+\begin{longtable}{lccccccccc}
+\caption{Estimation results of the upper-tail uPoT model}\\
+\label{tab:uptail_uPot} \\
+\toprule
+& \multicolumn{3}{c}{Shape parameter (tail index) $\xi_t$}
+& \multicolumn{3}{c}{Scale parameter $\alpha_t$}
+& & & \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+Coin
+& $\phi_0$ & $\phi_1$ & $\phi_2$
+& $\psi_0$ & $\psi_1$ & $\psi_2$
+& $\log L$
+& $\rho(\hat{\alpha}_{it},\tilde{\alpha}_{it})$
+& $\rho(\Delta\hat{\alpha}_{it},\Delta\tilde{\alpha}_{it})$ \\
+\midrule
+\endfirsthead
+
+\multicolumn{10}{r}{\textit{(continued from previous page)}}\\
+\toprule
+& \multicolumn{3}{c}{Shape parameter (tail index) $\xi_t$}
+& \multicolumn{3}{c}{Scale parameter $\alpha_t$}
+& & & \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+Coin
+& $\phi_0$ & $\phi_1$ & $\phi_2$
+& $\psi_0$ & $\psi_1$ & $\psi_2$
+& $\log L$
+& $\rho(\hat{\alpha}_{it},\tilde{\alpha}_{it})$
+& $\rho(\Delta\hat{\alpha}_{it},\Delta\tilde{\alpha}_{it})$ \\
+\midrule
+\endhead
+
+\midrule
+\multicolumn{10}{r}{\textit{(continued on next page)}}\\
+\endfoot
+
+\bottomrule
+\endlastfoot
+AAVE & $1.73\times 10^{-2}$ & $9.78\times 10^{-1}\text{***}$ & $3.46\times 10^{-2}$ & $3.00\times 10^{-1}$ & $9.23\times 10^{-1}\text{***}$ & $1.15\times 10^{-2}\text{***}$ & $-6.06\times 10^{2}$ & $0.972$ & $0.989$ \\
+ & $(1.72\times 10^{-2})$ & $(2.11\times 10^{-2})$ & $(3.28\times 10^{-2})$ & $(2.33\times 10^{-1})$ & $(4.21\times 10^{-2})$ & $(5.86\times 10^{-3})$ &  &  &  \\
+ADA & $4.05\times 10^{-2}$ & $9.21\times 10^{-1}\text{***}$ & $1.35\times 10^{-1}$ & $5.00\times 10^{-1}\text{***}$ & $7.99\times 10^{-1}\text{***}$ & $1.64\times 10^{-2}\text{***}$ & $-5.98\times 10^{2}$ & $0.991$ & $0.996$ \\
+ & $(6.82\times 10^{-2})$ & $(1.06\times 10^{-1})$ & $(1.28\times 10^{-1})$ & $(2.78\times 10^{-1})$ & $(6.98\times 10^{-2})$ & $(4.20\times 10^{-3})$ &  &  &  \\
+ALGO & $1.42\times 10^{-1}$ & $8.55\times 10^{-1}\text{***}$ & $1.08\times 10^{-2}$ & $2.93\times 10^{-1}$ & $8.92\times 10^{-1}\text{***}$ & $1.67\times 10^{-2}\text{***}$ & $-5.91\times 10^{2}$ & $0.961$ & $0.984$ \\
+ & $(3.22\times 10^{-1})$ & $(3.25\times 10^{-1})$ & $(6.94\times 10^{-2})$ & $(2.22\times 10^{-1})$ & $(3.33\times 10^{-2})$ & $(4.44\times 10^{-3})$ &  &  &  \\
+AVAX & $3.11\times 10^{-2}$ & $9.50\times 10^{-1}\text{***}$ & $4.43\times 10^{-2}$ & $3.00\times 10^{-1}$ & $8.61\times 10^{-1}\text{***}$ & $1.02\times 10^{-2}\text{***}$ & $-6.30\times 10^{2}$ & $0.998$ & $0.996$ \\
+ & $(3.79\times 10^{-2})$ & $(5.57\times 10^{-2})$ & $(5.65\times 10^{-2})$ & $(2.28\times 10^{-1})$ & $(7.20\times 10^{-2})$ & $(4.18\times 10^{-3})$ &  &  &  \\
+BCH & $2.00\times 10^{-1}$ & $6.93\times 10^{-1}\text{***}$ & $1.90\times 10^{-1}$ & $3.00\times 10^{-1}$ & $8.66\times 10^{-1}\text{***}$ & $4.53\times 10^{-3}$ & $-6.17\times 10^{2}$ & $0.969$ & $0.978$ \\
+ & $(2.64\times 10^{-1})$ & $(3.78\times 10^{-1})$ & $(2.15\times 10^{-1})$ & $(2.48\times 10^{-1})$ & $(1.31\times 10^{-1})$ & $(4.60\times 10^{-3})$ &  &  &  \\
+BNB & $1.38\times 10^{-2}$ & $9.42\times 10^{-1}\text{***}$ & $1.35\times 10^{-1}\text{***}$ & $3.00\times 10^{-1}\text{***}$ & $8.50\times 10^{-1}\text{***}$ & $5.34\times 10^{-3}$ & $-5.67\times 10^{2}$ & $0.980$ & $0.967$ \\
+ & $(1.62\times 10^{-2})$ & $(3.42\times 10^{-2})$ & $(7.69\times 10^{-2})$ & $(1.51\times 10^{-1})$ & $(9.22\times 10^{-2})$ & $(3.32\times 10^{-3})$ &  &  &  \\
+BTC & $1.52\times 10^{-1}$ & $7.93\times 10^{-1}\text{***}$ & $2.02\times 10^{-1}\text{***}$ & $3.31\times 10^{-2}$ & $9.77\times 10^{-1}\text{***}$ & $3.29\times 10^{-3}$ & $-5.49\times 10^{2}$ & $0.899$ & $0.980$ \\
+ & $(1.13\times 10^{-1})$ & $(1.25\times 10^{-1})$ & $(9.18\times 10^{-2})$ & $(3.49\times 10^{-2})$ & $(1.47\times 10^{-2})$ & $(2.47\times 10^{-3})$ &  &  &  \\
+CRO & $5.15\times 10^{-2}$ & $8.65\times 10^{-1}\text{***}$ & $1.51\times 10^{-1}$ & $3.00\times 10^{-1}$ & $6.76\times 10^{-1}\text{***}$ & $1.16\times 10^{-2}\text{***}$ & $-6.12\times 10^{2}$ & $0.965$ & $0.985$ \\
+ & $(3.96\times 10^{-2})$ & $(7.40\times 10^{-2})$ & $(9.18\times 10^{-2})$ & $(2.51\times 10^{-1})$ & $(9.81\times 10^{-2})$ & $(2.92\times 10^{-3})$ &  &  &  \\
+DOGE & $2.31\times 10^{-1}\text{***}$ & $4.00\times 10^{-1}$ & $3.00\times 10^{-1}\text{***}$ & $2.20\times 10^{-1}$ & $6.77\times 10^{-1}\text{***}$ & $9.12\times 10^{-3}\text{***}$ & $-6.47\times 10^{2}$ & $0.773$ & $0.885$ \\
+ & $(1.21\times 10^{-1})$ & $(2.44\times 10^{-1})$ & $(1.48\times 10^{-1})$ & $(1.58\times 10^{-1})$ & $(1.09\times 10^{-1})$ & $(2.20\times 10^{-3})$ &  &  &  \\
+DOT & $1.87\times 10^{-1}$ & $7.70\times 10^{-1}\text{***}$ & $1.31\times 10^{-1}$ & $3.00\times 10^{-1}$ & $8.93\times 10^{-1}\text{***}$ & $8.95\times 10^{-3}$ & $-6.02\times 10^{2}$ & $0.991$ & $0.993$ \\
+ & $(1.94\times 10^{-1})$ & $(2.24\times 10^{-1})$ & $(1.08\times 10^{-1})$ & $(4.29\times 10^{-1})$ & $(1.24\times 10^{-1})$ & $(7.98\times 10^{-3})$ &  &  &  \\
+ETC & $8.90\times 10^{-3}$ & $9.64\times 10^{-1}\text{***}$ & $4.61\times 10^{-2}$ & $3.00\times 10^{-1}\text{***}$ & $5.01\times 10^{-1}\text{***}$ & $1.80\times 10^{-2}\text{***}$ & $-6.28\times 10^{2}$ & $0.739$ & $0.892$ \\
+ & $(9.51\times 10^{-3})$ & $(2.47\times 10^{-2})$ & $(3.14\times 10^{-2})$ & $(1.67\times 10^{-1})$ & $(1.33\times 10^{-1})$ & $(5.29\times 10^{-3})$ &  &  &  \\
+ETH & $8.08\times 10^{-3}$ & $9.91\times 10^{-1}\text{***}$ & $1.35\times 10^{-2}$ & $5.00\times 10^{-1}$ & $9.19\times 10^{-1}\text{***}$ & $1.00\times 10^{-2}$ & $-5.60\times 10^{2}$ & $0.976$ & $0.987$ \\
+ & $(5.11\times 10^{-3})$ & $(6.48\times 10^{-3})$ & $(1.35\times 10^{-2})$ & $(5.17\times 10^{-1})$ & $(7.89\times 10^{-2})$ & $(7.17\times 10^{-3})$ &  &  &  \\
+FIL & $2.00\times 10^{-1}$ & $6.78\times 10^{-1}$ & $5.50\times 10^{-2}$ & $3.00\times 10^{-1}$ & $8.23\times 10^{-1}\text{***}$ & $4.88\times 10^{-3}$ & $-6.48\times 10^{2}$ & $0.971$ & $0.985$ \\
+ & $(3.64\times 10^{-1})$ & $(5.65\times 10^{-1})$ & $(1.24\times 10^{-1})$ & $(1.88\times 10^{-1})$ & $(1.38\times 10^{-1})$ & $(3.80\times 10^{-3})$ &  &  &  \\
+HBAR & $6.41\times 10^{-2}$ & $8.73\times 10^{-1}\text{***}$ & $1.40\times 10^{-1}$ & $1.96\times 10^{-1}$ & $8.60\times 10^{-1}\text{***}$ & $7.42\times 10^{-3}\text{***}$ & $-6.34\times 10^{2}$ & $0.987$ & $0.991$ \\
+ & $(4.28\times 10^{-2})$ & $(6.75\times 10^{-2})$ & $(8.81\times 10^{-2})$ & $(1.66\times 10^{-1})$ & $(6.79\times 10^{-2})$ & $(3.27\times 10^{-3})$ &  &  &  \\
+KCS & $5.73\times 10^{-2}$ & $8.20\times 10^{-1}\text{***}$ & $2.94\times 10^{-1}\text{***}$ & $2.16\times 10^{-1}$ & $7.58\times 10^{-1}\text{***}$ & $1.16\times 10^{-2}\text{***}$ & $-5.68\times 10^{2}$ & $0.991$ & $0.992$ \\
+ & $(4.38\times 10^{-2})$ & $(8.13\times 10^{-2})$ & $(1.14\times 10^{-1})$ & $(2.84\times 10^{-1})$ & $(1.35\times 10^{-1})$ & $(4.07\times 10^{-3})$ &  &  &  \\
+LEO & $2.00\times 10^{-1}$ & $5.27\times 10^{-1}$ & $3.00\times 10^{-1}$ & $4.74\times 10^{-2}$ & $8.40\times 10^{-1}\text{***}$ & $6.22\times 10^{-3}\text{***}$ & $-5.47\times 10^{2}$ & $0.985$ & $0.986$ \\
+ & $(1.14)$ & $(2.36)$ & $(5.99\times 10^{-1})$ & $(2.04\times 10^{-1})$ & $(1.11\times 10^{-1})$ & $(2.53\times 10^{-3})$ &  &  &  \\
+LINK & $2.00\times 10^{-1}$ & $8.10\times 10^{-1}\text{***}$ & $1.00\times 10^{-5}$ & $3.00\times 10^{-1}\text{***}$ & $9.15\times 10^{-1}\text{***}$ & $1.37\times 10^{-2}\text{***}$ & $-5.77\times 10^{2}$ & $0.941$ & $0.980$ \\
+ & $(4.59\times 10^{-1})$ & $(4.40\times 10^{-1})$ & $(8.19\times 10^{-2})$ & $(1.81\times 10^{-1})$ & $(4.17\times 10^{-2})$ & $(5.72\times 10^{-3})$ &  &  &  \\
+NEAR & $1.53\times 10^{-1}$ & $8.36\times 10^{-1}\text{***}$ & $1.16\times 10^{-1}$ & $8.57\times 10^{-2}$ & $9.76\times 10^{-1}\text{***}$ & $5.13\times 10^{-3}$ & $-6.17\times 10^{2}$ & $0.943$ & $0.990$ \\
+ & $(1.52\times 10^{-1})$ & $(1.53\times 10^{-1})$ & $(8.98\times 10^{-2})$ & $(9.21\times 10^{-2})$ & $(1.39\times 10^{-2})$ & $(3.23\times 10^{-3})$ &  &  &  \\
+OKB & $1.96\times 10^{-1}$ & $4.00\times 10^{-1}$ & $3.00\times 10^{-1}$ & $1.00\times 10^{-1}$ & $7.65\times 10^{-1}\text{***}$ & $4.42\times 10^{-3}\text{***}$ & $-6.32\times 10^{2}$ & $0.986$ & $0.994$ \\
+ & $(1.15)$ & $(2.70)$ & $(9.01\times 10^{-1})$ & $(8.17\times 10^{-2})$ & $(3.08\times 10^{-1})$ & $(2.13\times 10^{-3})$ &  &  &  \\
+QNT & $1.31\times 10^{-2}$ & $9.78\times 10^{-1}\text{***}$ & $3.55\times 10^{-2}$ & $3.00\times 10^{-1}$ & $8.93\times 10^{-1}\text{***}$ & $1.29\times 10^{-2}\text{***}$ & $-6.06\times 10^{2}$ & $0.994$ & $0.995$ \\
+ & $(1.01\times 10^{-2})$ & $(1.47\times 10^{-2})$ & $(3.16\times 10^{-2})$ & $(3.68\times 10^{-1})$ & $(6.46\times 10^{-2})$ & $(5.27\times 10^{-3})$ &  &  &  \\
+RNDR & $2.00\times 10^{-1}\text{***}$ & $7.32\times 10^{-1}\text{***}$ & $1.45\times 10^{-1}$ & $1.25\times 10^{-1}$ & $9.28\times 10^{-1}\text{***}$ & $1.03\times 10^{-2}\text{***}$ & $-6.48\times 10^{2}$ & $0.972$ & $0.992$ \\
+ & $(1.16\times 10^{-1})$ & $(1.50\times 10^{-1})$ & $(1.42\times 10^{-1})$ & $(1.56\times 10^{-1})$ & $(2.87\times 10^{-2})$ & $(3.75\times 10^{-3})$ &  &  &  \\
+SOL & $4.05\times 10^{-3}$ & $9.89\times 10^{-1}\text{***}$ & $3.84\times 10^{-2}\text{***}$ & $4.89\times 10^{-1}$ & $8.94\times 10^{-1}\text{***}$ & $1.00\times 10^{-2}\text{***}$ & $-6.05\times 10^{2}$ & $0.978$ & $0.978$ \\
+ & $(5.35\times 10^{-3})$ & $(5.43\times 10^{-3})$ & $(1.46\times 10^{-3})$ & $(5.80\times 10^{-1})$ & $(3.54\times 10^{-2})$ & $(2.30\times 10^{-3})$ &  &  &  \\
+TRX & $2.64\times 10^{-3}$ & $8.98\times 10^{-1}\text{***}$ & $2.50\times 10^{-1}\text{***}$ & $3.17\times 10^{-1}$ & $7.00\times 10^{-1}\text{***}$ & $3.43\times 10^{-3}\text{***}$ & $-5.76\times 10^{2}$ & $0.964$ & $0.968$ \\
+ & $(1.38\times 10^{-2})$ & $(3.20\times 10^{-2})$ & $(8.29\times 10^{-2})$ & $(2.28\times 10^{-1})$ & $(1.53\times 10^{-1})$ & $(1.30\times 10^{-3})$ &  &  &  \\
+UNI & $9.36\times 10^{-3}$ & $9.86\times 10^{-1}\text{***}$ & $1.44\times 10^{-2}$ & $3.00\times 10^{-1}$ & $8.74\times 10^{-1}\text{***}$ & $1.24\times 10^{-2}\text{***}$ & $-6.32\times 10^{2}$ & $0.976$ & $0.995$ \\
+ & $(8.71\times 10^{-3})$ & $(1.46\times 10^{-2})$ & $(2.20\times 10^{-2})$ & $(2.23\times 10^{-1})$ & $(6.00\times 10^{-2})$ & $(4.38\times 10^{-3})$ &  &  &  \\
+VET & $1.48\times 10^{-1}$ & $7.92\times 10^{-1}\text{***}$ & $2.79\times 10^{-1}\text{***}$ & $3.00\times 10^{-1}$ & $8.93\times 10^{-1}\text{***}$ & $1.17\times 10^{-2}$ & $-5.99\times 10^{2}$ & $0.998$ & $0.996$ \\
+ & $(1.38\times 10^{-1})$ & $(1.70\times 10^{-1})$ & $(1.51\times 10^{-1})$ & $(5.34\times 10^{-1})$ & $(1.31\times 10^{-1})$ & $(1.07\times 10^{-2})$ &  &  &  \\
+XLM & $1.75\times 10^{-1}$ & $6.89\times 10^{-1}\text{***}$ & $3.00\times 10^{-1}\text{***}$ & $3.00\times 10^{-1}$ & $8.51\times 10^{-1}\text{***}$ & $5.71\times 10^{-3}$ & $-6.18\times 10^{2}$ & $0.983$ & $0.987$ \\
+ & $(2.06\times 10^{-1})$ & $(2.89\times 10^{-1})$ & $(1.77\times 10^{-1})$ & $(4.50\times 10^{-1})$ & $(2.09\times 10^{-1})$ & $(5.27\times 10^{-3})$ &  &  &  \\
+XMR & $2.00\times 10^{-1}$ & $7.41\times 10^{-1}\text{***}$ & $1.79\times 10^{-1}$ & $2.25\times 10^{-1}$ & $8.97\times 10^{-1}\text{***}$ & $5.22\times 10^{-3}$ & $-5.76\times 10^{2}$ & $0.980$ & $0.979$ \\
+ & $(3.06\times 10^{-1})$ & $(3.66\times 10^{-1})$ & $(1.88\times 10^{-1})$ & $(3.37\times 10^{-1})$ & $(1.25\times 10^{-1})$ & $(3.47\times 10^{-3})$ &  &  &  \\
+ZEC & $2.00\times 10^{-1}\text{***}$ & $7.38\times 10^{-1}\text{***}$ & $2.49\times 10^{-1}\text{***}$ & $3.00\times 10^{-1}\text{***}$ & $9.11\times 10^{-1}\text{***}$ & $9.23\times 10^{-3}\text{***}$ & $-6.02\times 10^{2}$ & $0.996$ & $0.994$ \\
+ & $(1.11\times 10^{-1})$ & $(1.35\times 10^{-1})$ & $(1.43\times 10^{-1})$ & $(1.58\times 10^{-1})$ & $(3.65\times 10^{-2})$ & $(3.78\times 10^{-3})$ &  &  &  \\
+\end{longtable}
+
+\begin{flushleft}
+{\footnotesize
+\textit{Notes:} The sample period spans from 2020-10-18 to 2026-02-03. Standard errors are reported in parentheses. $\log L$ denotes the maximized log-likelihood value. $\rho(\hat{\alpha}_{it},\tilde{\alpha}_{it})$ and $\rho(\Delta\hat{\alpha}_{it},\Delta\tilde{\alpha}_{it})$ are Pearson correlation coefficients between the estimated risk measures and their benchmarks. The key hyperparameter of the uPOT model is the threshold, which is set at the 95\% quantile. As part of robustness checks, we also estimate the uPOT model using the 85\% and 90\% quantiles as alternative thresholds. The results indicate that the estimates are robust to the choice of the threshold, and the corresponding tables are available from the authors upon request. $^{***}$, $^{**}$, and $^{*}$ indicate significance at the 1\%, 5\%, and 10\% levels, respectively.
+}
+\end{flushleft}
+
+\clearpage
+
+\begin{longtable}{lccccccccc}
+\caption{Estimation results of the lower-tail uPoT model}\\
+\label{tab:downtail_uPot} \\
+\toprule
+& \multicolumn{3}{c}{Shape parameter (tail index) $\xi_t$}
+& \multicolumn{3}{c}{Scale parameter $\alpha_t$}
+& & & \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+Coin
+& $\phi_0$ & $\phi_1$ & $\phi_2$
+& $\psi_0$ & $\psi_1$ & $\psi_2$
+& $\log L$
+& $\rho(\hat{\alpha}_{it},\tilde{\alpha}_{it})$
+& $\rho(\Delta\hat{\alpha}_{it},\Delta\tilde{\alpha}_{it})$ \\
+\midrule
+\endfirsthead
+
+\multicolumn{10}{r}{\textit{(continued from previous page)}}\\
+\toprule
+& \multicolumn{3}{c}{Shape parameter (tail index) $\xi_t$}
+& \multicolumn{3}{c}{Scale parameter $\alpha_t$}
+& & & \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+Coin
+& $\phi_0$ & $\phi_1$ & $\phi_2$
+& $\psi_0$ & $\psi_1$ & $\psi_2$
+& $\log L$
+& $\rho(\hat{\alpha}_{it},\tilde{\alpha}_{it})$
+& $\rho(\Delta\hat{\alpha}_{it},\Delta\tilde{\alpha}_{it})$ \\
+\midrule
+\endhead
+
+\midrule
+\multicolumn{10}{r}{\textit{(continued on next page)}}\\
+\endfoot
+
+\bottomrule
+\endlastfoot
+AAVE & $1.35\times 10^{-3}$ & $9.96\times 10^{-1}\text{***}$ & $1.53\times 10^{-2}$ & $3.00\times 10^{-1}$ & $9.24\times 10^{-1}\text{***}$ & $8.52\times 10^{-3}\text{***}$ & $-5.96\times 10^{2}$ & $0.970$ & $0.987$ \\
+ & $(1.75\times 10^{-3})$ & $(2.63\times 10^{-3})$ & $(9.77\times 10^{-3})$ & $(2.80\times 10^{-1})$ & $(3.92\times 10^{-2})$ & $(3.71\times 10^{-3})$ &  &  &  \\
+ADA & $1.45\times 10^{-3}$ & $9.95\times 10^{-1}\text{***}$ & $1.75\times 10^{-2}$ & $3.00\times 10^{-1}\text{***}$ & $9.07\times 10^{-1}\text{***}$ & $8.43\times 10^{-3}\text{***}$ & $-5.83\times 10^{2}$ & $0.964$ & $0.981$ \\
+ & $(3.07\times 10^{-3})$ & $(4.85\times 10^{-3})$ & $(1.27\times 10^{-2})$ & $(1.41\times 10^{-1})$ & $(3.40\times 10^{-2})$ & $(2.83\times 10^{-3})$ &  &  &  \\
+ALGO & $-8.71\times 10^{-4}$ & $9.99\times 10^{-1}\text{***}$ & $9.88\times 10^{-3}\text{***}$ & $3.00\times 10^{-1}\text{***}$ & $9.07\times 10^{-1}\text{***}$ & $1.16\times 10^{-2}\text{***}$ & $-5.99\times 10^{2}$ & $0.941$ & $0.975$ \\
+ & $(1.89\times 10^{-3})$ & $(2.31\times 10^{-3})$ & $(5.27\times 10^{-3})$ & $(1.46\times 10^{-1})$ & $(4.47\times 10^{-2})$ & $(5.00\times 10^{-3})$ &  &  &  \\
+AVAX & $1.04\times 10^{-3}$ & $9.97\times 10^{-1}\text{***}$ & $1.02\times 10^{-2}\text{***}$ & $3.00\times 10^{-1}$ & $9.19\times 10^{-1}\text{***}$ & $1.01\times 10^{-2}\text{***}$ & $-5.89\times 10^{2}$ & $0.968$ & $0.984$ \\
+ & $(2.11\times 10^{-3})$ & $(2.59\times 10^{-3})$ & $(5.40\times 10^{-3})$ & $(2.29\times 10^{-1})$ & $(3.19\times 10^{-2})$ & $(3.30\times 10^{-3})$ &  &  &  \\
+BCH & $3.29\times 10^{-3}$ & $9.91\times 10^{-1}\text{***}$ & $2.37\times 10^{-2}$ & $5.00\times 10^{-1}\text{***}$ & $8.38\times 10^{-1}\text{***}$ & $9.67\times 10^{-3}\text{***}$ & $-5.92\times 10^{2}$ & $0.986$ & $0.987$ \\
+ & $(4.40\times 10^{-3})$ & $(8.44\times 10^{-3})$ & $(1.98\times 10^{-2})$ & $(2.80\times 10^{-1})$ & $(6.51\times 10^{-2})$ & $(3.31\times 10^{-3})$ &  &  &  \\
+BNB & $5.89\times 10^{-3}$ & $9.86\times 10^{-1}\text{***}$ & $3.01\times 10^{-2}$ & $3.00\times 10^{-1}\text{***}$ & $8.96\times 10^{-1}\text{***}$ & $4.81\times 10^{-3}\text{***}$ & $-5.49\times 10^{2}$ & $0.975$ & $0.954$ \\
+ & $(6.29\times 10^{-3})$ & $(1.14\times 10^{-2})$ & $(2.37\times 10^{-2})$ & $(1.49\times 10^{-1})$ & $(4.75\times 10^{-2})$ & $(2.03\times 10^{-3})$ &  &  &  \\
+BTC & $1.38\times 10^{-3}$ & $9.95\times 10^{-1}\text{***}$ & $1.13\times 10^{-2}$ & $2.59\times 10^{-1}$ & $8.84\times 10^{-1}\text{***}$ & $5.31\times 10^{-3}$ & $-5.58\times 10^{2}$ & $0.973$ & $0.984$ \\
+ & $(1.98\times 10^{-3})$ & $(4.35\times 10^{-3})$ & $(9.08\times 10^{-3})$ & $(1.96\times 10^{-1})$ & $(7.60\times 10^{-2})$ & $(4.12\times 10^{-3})$ &  &  &  \\
+CRO & $2.89\times 10^{-2}$ & $9.41\times 10^{-1}\text{***}$ & $1.06\times 10^{-1}$ & $5.00\times 10^{-1}\text{***}$ & $8.31\times 10^{-1}\text{***}$ & $8.23\times 10^{-3}\text{***}$ & $-5.98\times 10^{2}$ & $0.985$ & $0.974$ \\
+ & $(2.61\times 10^{-2})$ & $(4.13\times 10^{-2})$ & $(6.79\times 10^{-2})$ & $(2.55\times 10^{-1})$ & $(7.45\times 10^{-2})$ & $(3.85\times 10^{-3})$ &  &  &  \\
+DOGE & $1.50\times 10^{-1}$ & $7.93\times 10^{-1}\text{***}$ & $2.65\times 10^{-1}\text{***}$ & $2.57\times 10^{-1}\text{***}$ & $9.51\times 10^{-1}\text{***}$ & $1.24\times 10^{-3}\text{***}$ & $-6.02\times 10^{2}$ & $0.984$ & $0.978$ \\
+ & $(1.19\times 10^{-1})$ & $(1.41\times 10^{-1})$ & $(1.25\times 10^{-1})$ & $(1.31\times 10^{-1})$ & $(1.96\times 10^{-2})$ & $(4.27\times 10^{-4})$ &  &  &  \\
+DOT & $4.99\times 10^{-3}$ & $9.90\times 10^{-1}\text{***}$ & $2.41\times 10^{-2}$ & $3.00\times 10^{-1}$ & $9.27\times 10^{-1}\text{***}$ & $4.89\times 10^{-3}\text{***}$ & $-5.96\times 10^{2}$ & $0.990$ & $0.981$ \\
+ & $(4.07\times 10^{-3})$ & $(6.45\times 10^{-3})$ & $(1.68\times 10^{-2})$ & $(1.87\times 10^{-1})$ & $(3.70\times 10^{-2})$ & $(2.50\times 10^{-3})$ &  &  &  \\
+ETC & $1.04\times 10^{-2}$ & $9.81\times 10^{-1}\text{***}$ & $4.55\times 10^{-2}$ & $3.00\times 10^{-1}$ & $9.49\times 10^{-1}\text{***}$ & $2.90\times 10^{-3}$ & $-5.94\times 10^{2}$ & $0.968$ & $0.969$ \\
+ & $(9.52\times 10^{-3})$ & $(1.33\times 10^{-2})$ & $(2.95\times 10^{-2})$ & $(2.33\times 10^{-1})$ & $(4.15\times 10^{-2})$ & $(2.79\times 10^{-3})$ &  &  &  \\
+ETH & $6.57\times 10^{-3}$ & $9.86\times 10^{-1}\text{***}$ & $3.18\times 10^{-2}\text{***}$ & $3.00\times 10^{-1}$ & $9.36\times 10^{-1}\text{***}$ & $1.72\times 10^{-3}$ & $-5.79\times 10^{2}$ & $0.979$ & $0.973$ \\
+ & $(4.42\times 10^{-3})$ & $(7.07\times 10^{-3})$ & $(1.87\times 10^{-2})$ & $(4.47\times 10^{-1})$ & $(1.10\times 10^{-1})$ & $(4.90\times 10^{-3})$ &  &  &  \\
+FIL & $5.56\times 10^{-4}$ & $9.95\times 10^{-1}\text{***}$ & $1.76\times 10^{-2}$ & $3.00\times 10^{-1}\text{***}$ & $8.80\times 10^{-1}\text{***}$ & $9.02\times 10^{-3}\text{***}$ & $-6.22\times 10^{2}$ & $0.910$ & $0.971$ \\
+ & $(3.13\times 10^{-3})$ & $(4.75\times 10^{-3})$ & $(1.11\times 10^{-2})$ & $(1.58\times 10^{-1})$ & $(4.82\times 10^{-2})$ & $(3.34\times 10^{-3})$ &  &  &  \\
+HBAR & $7.98\times 10^{-4}$ & $9.97\times 10^{-1}\text{***}$ & $1.29\times 10^{-2}$ & $3.00\times 10^{-1}$ & $9.44\times 10^{-1}\text{***}$ & $6.39\times 10^{-3}$ & $-5.80\times 10^{2}$ & $0.867$ & $0.949$ \\
+ & $(1.91\times 10^{-3})$ & $(3.54\times 10^{-3})$ & $(1.33\times 10^{-2})$ & $(4.22\times 10^{-1})$ & $(7.09\times 10^{-2})$ & $(5.55\times 10^{-3})$ &  &  &  \\
+KCS & $8.18\times 10^{-2}$ & $8.50\times 10^{-1}\text{***}$ & $1.80\times 10^{-1}$ & $1.67\times 10^{-1}$ & $8.91\times 10^{-1}\text{***}$ & $6.42\times 10^{-3}\text{***}$ & $-5.69\times 10^{2}$ & $0.968$ & $0.969$ \\
+ & $(7.30\times 10^{-2})$ & $(1.14\times 10^{-1})$ & $(1.12\times 10^{-1})$ & $(1.29\times 10^{-1})$ & $(4.33\times 10^{-2})$ & $(2.21\times 10^{-3})$ &  &  &  \\
+LEO & $1.93\times 10^{-2}$ & $9.49\times 10^{-1}\text{***}$ & $5.75\times 10^{-2}$ & $1.41\times 10^{-1}\text{***}$ & $7.99\times 10^{-1}\text{***}$ & $7.78\times 10^{-3}\text{***}$ & $-5.36\times 10^{2}$ & $0.987$ & $0.980$ \\
+ & $(1.74\times 10^{-2})$ & $(3.32\times 10^{-2})$ & $(3.88\times 10^{-2})$ & $(8.28\times 10^{-2})$ & $(7.38\times 10^{-2})$ & $(1.88\times 10^{-3})$ &  &  &  \\
+LINK & $1.78\times 10^{-3}$ & $9.95\times 10^{-1}\text{***}$ & $2.26\times 10^{-2}\text{***}$ & $3.00\times 10^{-1}\text{***}$ & $9.22\times 10^{-1}\text{***}$ & $1.06\times 10^{-2}\text{***}$ & $-5.86\times 10^{2}$ & $0.931$ & $0.975$ \\
+ & $(1.87\times 10^{-3})$ & $(3.03\times 10^{-3})$ & $(1.19\times 10^{-2})$ & $(1.70\times 10^{-1})$ & $(3.61\times 10^{-2})$ & $(4.42\times 10^{-3})$ &  &  &  \\
+NEAR & $3.24\times 10^{-3}$ & $9.96\times 10^{-1}\text{***}$ & $9.35\times 10^{-3}$ & $3.00\times 10^{-1}$ & $9.47\times 10^{-1}\text{***}$ & $8.91\times 10^{-3}\text{***}$ & $-5.99\times 10^{2}$ & $0.998$ & $0.997$ \\
+ & $(3.76\times 10^{-3})$ & $(3.93\times 10^{-3})$ & $(7.69\times 10^{-3})$ & $(1.95\times 10^{-1})$ & $(1.94\times 10^{-2})$ & $(3.12\times 10^{-3})$ &  &  &  \\
+OKB & $3.80\times 10^{-2}$ & $9.02\times 10^{-1}\text{***}$ & $2.28\times 10^{-1}\text{***}$ & $5.00\times 10^{-1}\text{***}$ & $8.30\times 10^{-1}\text{***}$ & $3.77\times 10^{-3}\text{***}$ & $-5.58\times 10^{2}$ & $0.973$ & $0.971$ \\
+ & $(2.57\times 10^{-2})$ & $(3.65\times 10^{-2})$ & $(8.19\times 10^{-2})$ & $(2.84\times 10^{-1})$ & $(1.15\times 10^{-1})$ & $(2.28\times 10^{-3})$ &  &  &  \\
+QNT & $3.95\times 10^{-3}$ & $9.92\times 10^{-1}\text{***}$ & $1.66\times 10^{-2}$ & $3.00\times 10^{-1}\text{***}$ & $8.62\times 10^{-1}\text{***}$ & $9.89\times 10^{-3}\text{***}$ & $-5.90\times 10^{2}$ & $0.979$ & $0.991$ \\
+ & $(4.22\times 10^{-3})$ & $(7.03\times 10^{-3})$ & $(1.31\times 10^{-2})$ & $(1.39\times 10^{-1})$ & $(5.59\times 10^{-2})$ & $(4.02\times 10^{-3})$ &  &  &  \\
+RNDR & $1.75\times 10^{-1}$ & $8.15\times 10^{-1}\text{***}$ & $5.56\times 10^{-2}$ & $3.00\times 10^{-1}$ & $9.31\times 10^{-1}\text{***}$ & $8.25\times 10^{-3}\text{***}$ & $-6.18\times 10^{2}$ & $0.969$ & $0.989$ \\
+ & $(3.03\times 10^{-1})$ & $(3.14\times 10^{-1})$ & $(9.75\times 10^{-2})$ & $(2.67\times 10^{-1})$ & $(3.29\times 10^{-2})$ & $(3.49\times 10^{-3})$ &  &  &  \\
+SOL & $7.81\times 10^{-4}$ & $9.97\times 10^{-1}\text{***}$ & $1.54\times 10^{-2}\text{***}$ & $3.00\times 10^{-1}$ & $9.67\times 10^{-1}\text{***}$ & $1.93\times 10^{-3}$ & $-5.97\times 10^{2}$ & $0.816$ & $0.895$ \\
+ & $(1.19\times 10^{-3})$ & $(1.87\times 10^{-3})$ & $(9.02\times 10^{-3})$ & $(1.84\times 10^{-1})$ & $(2.33\times 10^{-2})$ & $(2.03\times 10^{-3})$ &  &  &  \\
+TRX & $1.35\times 10^{-2}$ & $9.12\times 10^{-1}\text{***}$ & $2.26\times 10^{-1}\text{***}$ & $4.89\times 10^{-1}$ & $7.44\times 10^{-1}\text{***}$ & $4.38\times 10^{-3}\text{***}$ & $-5.57\times 10^{2}$ & $0.965$ & $0.961$ \\
+ & $(1.40\times 10^{-2})$ & $(2.83\times 10^{-2})$ & $(7.67\times 10^{-2})$ & $(5.24\times 10^{-1})$ & $(2.29\times 10^{-1})$ & $(2.39\times 10^{-3})$ &  &  &  \\
+UNI & $5.03\times 10^{-3}$ & $9.93\times 10^{-1}\text{***}$ & $2.08\times 10^{-2}$ & $5.00\times 10^{-1}$ & $9.52\times 10^{-1}\text{***}$ & $3.38\times 10^{-3}$ & $-5.92\times 10^{2}$ & $0.978$ & $0.991$ \\
+ & $(3.52\times 10^{-3})$ & $(4.12\times 10^{-3})$ & $(1.28\times 10^{-2})$ & $(6.43\times 10^{-1})$ & $(6.29\times 10^{-2})$ & $(4.90\times 10^{-3})$ &  &  &  \\
+VET & $3.10\times 10^{-3}$ & $9.95\times 10^{-1}\text{***}$ & $1.47\times 10^{-2}$ & $3.00\times 10^{-1}\text{***}$ & $9.41\times 10^{-1}\text{***}$ & $7.27\times 10^{-3}\text{***}$ & $-5.84\times 10^{2}$ & $0.970$ & $0.983$ \\
+ & $(2.94\times 10^{-3})$ & $(3.86\times 10^{-3})$ & $(1.02\times 10^{-2})$ & $(1.74\times 10^{-1})$ & $(2.28\times 10^{-2})$ & $(3.16\times 10^{-3})$ &  &  &  \\
+XLM & $2.39\times 10^{-3}$ & $9.93\times 10^{-1}\text{***}$ & $1.75\times 10^{-2}$ & $1.67\times 10^{-1}$ & $9.14\times 10^{-1}\text{***}$ & $4.69\times 10^{-3}\text{***}$ & $-5.91\times 10^{2}$ & $0.985$ & $0.983$ \\
+ & $(2.82\times 10^{-3})$ & $(6.04\times 10^{-3})$ & $(1.36\times 10^{-2})$ & $(1.30\times 10^{-1})$ & $(4.22\times 10^{-2})$ & $(1.74\times 10^{-3})$ &  &  &  \\
+XMR & $4.46\times 10^{-3}$ & $9.91\times 10^{-1}\text{***}$ & $1.58\times 10^{-2}\text{***}$ & $2.35\times 10^{-1}\text{***}$ & $8.86\times 10^{-1}\text{***}$ & $7.86\times 10^{-3}\text{***}$ & $-5.79\times 10^{2}$ & $0.987$ & $0.986$ \\
+ & $(3.06\times 10^{-3})$ & $(5.09\times 10^{-3})$ & $(8.65\times 10^{-3})$ & $(1.23\times 10^{-1})$ & $(3.31\times 10^{-2})$ & $(2.16\times 10^{-3})$ &  &  &  \\
+ZEC & $3.70\times 10^{-3}$ & $9.95\times 10^{-1}\text{***}$ & $8.55\times 10^{-3}$ & $3.00\times 10^{-1}$ & $9.45\times 10^{-1}\text{***}$ & $5.67\times 10^{-3}\text{***}$ & $-6.05\times 10^{2}$ & $0.974$ & $0.977$ \\
+ & $(6.73\times 10^{-3})$ & $(8.99\times 10^{-3})$ & $(1.55\times 10^{-2})$ & $(2.65\times 10^{-1})$ & $(3.57\times 10^{-2})$ & $(2.34\times 10^{-3})$ &  &  &  \\
+\end{longtable}
+
+\begin{flushleft}
+{\footnotesize
+\textit{Notes:} The sample period spans from 2020-10-18 to 2026-02-03. Standard errors are reported in parentheses. $\log L$ denotes the maximized log-likelihood value. $\rho(\hat{\alpha}_{it},\tilde{\alpha}_{it})$ and $\rho(\Delta\hat{\alpha}_{it},\Delta\tilde{\alpha}_{it})$ are Pearson correlation coefficients between the estimated risk measures and their benchmarks. The key hyperparameter of the uPOT model is the threshold, which is set at the 95\% quantile. As part of robustness checks, we also estimate the uPOT model using the 85\% and 90\% quantiles as alternative thresholds. The results indicate that the estimates are robust to the choice of the threshold, and the corresponding tables are available from the authors upon request. $^{***}$, $^{**}$, and $^{*}$ indicate significance at the 1\%, 5\%, and 10\% levels, respectively.
+}
+\end{flushleft}
+
+\clearpage
+
+\begin{table}[htbp]
+\centering
+\setlength{\tabcolsep}{2pt}
+\caption{Lower-tail volatility spillover table.}
+\label{tab:downtail_spillover}
+\begin{adjustbox}{width=\linewidth}
+\begin{tabular}{@{}lccccccccccccccccccccccccccccc@{}}
+\toprule
+ & AAVE & ALGO & AVAX & BNB & BCH & BTC & ADA & LINK & CRO & DOGE & ETC & ETH & FIL & HBAR & KCS & XMR & NEAR & OKB & DOT & QNT & RNDR & SOL & XLM & TRX & UNI & LEO & VET & ZEC & \shortstack{Directional\\FROM others} \\
+\midrule
+AAVE & $19.11$ & $2.63$ & $4.29$ & $3.65$ & $2.84$ & $2.52$ & $4.74$ & $3.73$ & $1.74$ & $3.07$ & $3.70$ & $3.36$ & $2.59$ & $2.78$ & $1.98$ & $3.17$ & $2.64$ & $2.52$ & $3.60$ & $2.28$ & $1.95$ & $2.57$ & $2.82$ & $2.34$ & $3.70$ & $2.08$ & $4.57$ & $3.04$ & $80.89$ \\
+ALGO & $3.48$ & $18.36$ & $4.05$ & $4.23$ & $2.81$ & $3.21$ & $3.91$ & $3.77$ & $2.23$ & $2.61$ & $4.01$ & $3.18$ & $3.85$ & $4.40$ & $2.66$ & $1.80$ & $3.41$ & $2.03$ & $3.18$ & $2.26$ & $1.60$ & $2.63$ & $4.23$ & $2.16$ & $2.53$ & $1.14$ & $4.19$ & $2.07$ & $81.64$ \\
+AVAX & $4.01$ & $4.31$ & $18.66$ & $3.96$ & $2.52$ & $3.57$ & $4.30$ & $3.56$ & $2.54$ & $2.75$ & $3.53$ & $2.76$ & $2.95$ & $3.71$ & $1.54$ & $2.91$ & $3.46$ & $2.29$ & $3.13$ & $3.21$ & $2.40$ & $3.11$ & $2.59$ & $1.23$ & $1.64$ & $1.43$ & $5.60$ & $2.33$ & $81.34$ \\
+BNB & $1.86$ & $2.41$ & $2.23$ & $22.41$ & $3.43$ & $3.05$ & $3.95$ & $2.42$ & $2.68$ & $2.30$ & $3.75$ & $4.43$ & $2.11$ & $2.69$ & $3.35$ & $2.79$ & $3.00$ & $3.83$ & $3.26$ & $2.99$ & $1.74$ & $2.38$ & $2.53$ & $2.79$ & $2.41$ & $2.31$ & $4.81$ & $2.09$ & $77.59$ \\
+BCH & $2.65$ & $1.91$ & $3.09$ & $4.16$ & $20.75$ & $4.52$ & $4.00$ & $3.27$ & $2.32$ & $2.91$ & $3.65$ & $3.31$ & $2.45$ & $1.77$ & $2.04$ & $3.11$ & $3.27$ & $2.05$ & $2.90$ & $2.22$ & $1.55$ & $2.30$ & $3.14$ & $2.15$ & $2.50$ & $1.55$ & $7.28$ & $3.17$ & $79.25$ \\
+BTC & $3.50$ & $3.10$ & $3.40$ & $4.90$ & $5.37$ & $18.54$ & $3.30$ & $2.20$ & $2.17$ & $3.28$ & $3.63$ & $4.91$ & $2.22$ & $2.37$ & $2.91$ & $2.92$ & $2.90$ & $1.21$ & $3.24$ & $2.48$ & $1.20$ & $2.50$ & $2.92$ & $2.41$ & $1.98$ & $2.23$ & $4.73$ & $3.48$ & $81.46$ \\
+ADA & $4.43$ & $2.80$ & $3.53$ & $4.87$ & $3.10$ & $3.06$ & $17.57$ & $3.65$ & $1.59$ & $2.75$ & $4.30$ & $2.85$ & $2.65$ & $4.05$ & $2.05$ & $2.18$ & $3.03$ & $1.84$ & $4.16$ & $2.50$ & $1.85$ & $2.48$ & $3.99$ & $2.77$ & $2.08$ & $2.63$ & $4.91$ & $2.31$ & $82.43$ \\
+LINK & $3.53$ & $3.25$ & $4.38$ & $2.75$ & $2.96$ & $2.68$ & $5.44$ & $19.94$ & $3.19$ & $2.47$ & $3.95$ & $3.90$ & $3.43$ & $3.87$ & $1.70$ & $1.69$ & $2.39$ & $1.68$ & $4.39$ & $2.86$ & $1.25$ & $2.31$ & $3.66$ & $1.73$ & $2.41$ & $1.26$ & $5.25$ & $1.71$ & $80.06$ \\
+CRO & $3.10$ & $3.19$ & $3.41$ & $5.48$ & $3.33$ & $3.01$ & $3.89$ & $2.78$ & $24.34$ & $2.30$ & $3.79$ & $3.09$ & $2.60$ & $3.19$ & $2.54$ & $1.24$ & $2.32$ & $2.69$ & $2.80$ & $2.10$ & $1.76$ & $2.74$ & $2.63$ & $2.49$ & $2.30$ & $2.37$ & $2.56$ & $1.96$ & $75.66$ \\
+DOGE & $2.16$ & $2.82$ & $2.84$ & $3.33$ & $3.12$ & $3.67$ & $3.84$ & $3.03$ & $2.57$ & $26.44$ & $4.07$ & $4.32$ & $3.40$ & $2.48$ & $1.93$ & $2.24$ & $2.44$ & $1.72$ & $2.87$ & $1.74$ & $1.62$ & $2.67$ & $3.06$ & $1.89$ & $2.26$ & $1.30$ & $3.96$ & $2.21$ & $73.56$ \\
+ETC & $2.94$ & $3.03$ & $2.89$ & $4.23$ & $3.30$ & $3.05$ & $4.98$ & $3.20$ & $2.12$ & $3.29$ & $17.41$ & $4.68$ & $2.76$ & $3.06$ & $2.07$ & $3.25$ & $2.62$ & $3.20$ & $3.52$ & $2.09$ & $1.51$ & $2.55$ & $3.27$ & $2.70$ & $2.64$ & $2.37$ & $4.94$ & $2.32$ & $82.59$ \\
+ETH & $3.54$ & $3.22$ & $2.71$ & $4.24$ & $3.34$ & $4.60$ & $4.86$ & $3.21$ & $2.61$ & $3.52$ & $5.12$ & $16.28$ & $2.66$ & $3.48$ & $1.90$ & $2.20$ & $2.91$ & $2.01$ & $3.17$ & $3.00$ & $1.90$ & $2.79$ & $2.23$ & $3.03$ & $2.90$ & $1.96$ & $4.40$ & $2.20$ & $83.72$ \\
+FIL & $3.42$ & $3.22$ & $4.47$ & $3.59$ & $3.25$ & $3.30$ & $4.82$ & $3.60$ & $2.48$ & $3.40$ & $4.47$ & $3.41$ & $16.19$ & $3.38$ & $1.93$ & $2.22$ & $3.60$ & $1.84$ & $4.72$ & $2.12$ & $1.79$ & $2.13$ & $3.04$ & $1.78$ & $2.76$ & $1.34$ & $4.93$ & $2.77$ & $83.81$ \\
+HBAR & $3.53$ & $3.78$ & $5.36$ & $3.75$ & $2.84$ & $1.95$ & $5.70$ & $3.83$ & $2.37$ & $2.61$ & $3.52$ & $3.00$ & $2.46$ & $18.67$ & $2.60$ & $2.28$ & $2.98$ & $1.98$ & $3.89$ & $2.44$ & $2.33$ & $2.83$ & $3.40$ & $1.81$ & $2.45$ & $1.91$ & $3.25$ & $2.51$ & $81.33$ \\
+KCS & $2.31$ & $2.39$ & $2.57$ & $3.89$ & $3.00$ & $3.45$ & $2.35$ & $2.48$ & $2.55$ & $2.32$ & $2.65$ & $3.73$ & $2.33$ & $2.97$ & $29.91$ & $2.98$ & $2.82$ & $2.25$ & $2.23$ & $1.82$ & $1.29$ & $2.12$ & $2.47$ & $2.67$ & $2.79$ & $1.66$ & $2.72$ & $3.27$ & $70.09$ \\
+XMR & $3.36$ & $3.05$ & $3.17$ & $3.04$ & $2.31$ & $2.93$ & $2.98$ & $3.78$ & $1.68$ & $1.77$ & $3.96$ & $2.54$ & $2.45$ & $2.26$ & $2.60$ & $24.09$ & $3.02$ & $2.38$ & $2.85$ & $3.01$ & $1.90$ & $2.26$ & $3.37$ & $2.28$ & $3.34$ & $2.01$ & $3.83$ & $3.79$ & $75.91$ \\
+NEAR & $3.48$ & $3.32$ & $5.16$ & $4.49$ & $2.89$ & $3.10$ & $4.04$ & $2.96$ & $2.06$ & $2.65$ & $3.68$ & $2.93$ & $2.78$ & $3.17$ & $2.43$ & $2.72$ & $19.36$ & $1.98$ & $4.22$ & $2.23$ & $1.92$ & $2.60$ & $2.36$ & $1.70$ & $2.19$ & $1.87$ & $5.17$ & $2.58$ & $80.64$ \\
+OKB & $2.41$ & $2.20$ & $2.12$ & $4.28$ & $1.88$ & $2.45$ & $3.23$ & $2.22$ & $3.79$ & $2.60$ & $3.72$ & $4.03$ & $2.22$ & $2.47$ & $3.92$ & $2.31$ & $2.33$ & $27.80$ & $2.21$ & $2.28$ & $1.91$ & $2.67$ & $2.36$ & $2.80$ & $2.34$ & $2.49$ & $2.48$ & $2.48$ & $72.20$ \\
+DOT & $3.67$ & $3.31$ & $4.09$ & $3.32$ & $2.83$ & $2.38$ & $5.11$ & $3.97$ & $2.61$ & $2.49$ & $4.11$ & $3.41$ & $4.21$ & $3.60$ & $1.90$ & $2.43$ & $2.97$ & $2.47$ & $16.68$ & $2.96$ & $1.68$ & $2.94$ & $2.57$ & $2.01$ & $2.41$ & $1.80$ & $5.63$ & $2.45$ & $83.32$ \\
+QNT & $3.31$ & $3.77$ & $3.48$ & $3.51$ & $3.35$ & $4.07$ & $2.92$ & $3.79$ & $3.01$ & $2.74$ & $3.38$ & $2.47$ & $2.15$ & $2.34$ & $2.33$ & $2.24$ & $2.29$ & $1.87$ & $3.57$ & $22.92$ & $2.11$ & $2.35$ & $2.49$ & $2.16$ & $2.85$ & $1.94$ & $4.52$ & $2.07$ & $77.08$ \\
+RNDR & $2.36$ & $2.33$ & $3.35$ & $2.06$ & $2.04$ & $2.71$ & $3.16$ & $2.55$ & $2.39$ & $2.82$ & $3.08$ & $2.51$ & $2.63$ & $2.23$ & $1.07$ & $1.43$ & $2.58$ & $1.56$ & $3.37$ & $2.36$ & $37.67$ & $2.59$ & $1.96$ & $1.39$ & $1.79$ & $1.50$ & $2.79$ & $1.71$ & $62.33$ \\
+SOL & $4.09$ & $2.73$ & $3.69$ & $4.61$ & $3.08$ & $3.40$ & $5.43$ & $2.99$ & $2.75$ & $2.57$ & $3.44$ & $3.94$ & $2.46$ & $3.50$ & $3.26$ & $2.10$ & $2.59$ & $2.91$ & $3.29$ & $2.02$ & $2.24$ & $18.44$ & $2.24$ & $1.68$ & $2.08$ & $1.82$ & $3.96$ & $2.70$ & $81.56$ \\
+XLM & $3.93$ & $3.43$ & $2.83$ & $4.79$ & $4.10$ & $3.41$ & $4.67$ & $2.81$ & $2.75$ & $3.44$ & $4.27$ & $3.64$ & $3.30$ & $3.98$ & $2.69$ & $2.49$ & $2.66$ & $2.49$ & $2.84$ & $1.27$ & $1.35$ & $2.80$ & $17.31$ & $3.03$ & $2.32$ & $1.42$ & $3.98$ & $2.02$ & $82.69$ \\
+TRX & $1.74$ & $3.26$ & $2.11$ & $4.39$ & $2.62$ & $2.61$ & $2.53$ & $2.43$ & $2.97$ & $2.45$ & $3.04$ & $2.68$ & $2.42$ & $2.28$ & $2.94$ & $1.96$ & $1.82$ & $2.51$ & $2.94$ & $2.48$ & $1.69$ & $1.65$ & $2.86$ & $30.90$ & $2.19$ & $2.43$ & $4.13$ & $1.96$ & $69.10$ \\
+UNI & $4.49$ & $3.22$ & $2.92$ & $2.09$ & $2.02$ & $3.22$ & $4.33$ & $4.50$ & $2.65$ & $2.20$ & $4.34$ & $3.23$ & $2.99$ & $3.11$ & $2.50$ & $2.58$ & $3.81$ & $2.32$ & $3.65$ & $2.36$ & $1.92$ & $2.58$ & $2.35$ & $2.20$ & $20.62$ & $1.62$ & $4.10$ & $2.11$ & $79.38$ \\
+LEO & $2.72$ & $3.01$ & $3.00$ & $3.83$ & $3.00$ & $2.70$ & $2.50$ & $2.22$ & $3.48$ & $1.55$ & $2.60$ & $2.56$ & $2.01$ & $1.97$ & $3.10$ & $2.17$ & $3.47$ & $3.30$ & $2.30$ & $2.35$ & $1.67$ & $1.74$ & $2.83$ & $2.79$ & $2.66$ & $28.60$ & $3.79$ & $2.09$ & $71.40$ \\
+VET & $3.48$ & $3.12$ & $3.24$ & $3.86$ & $3.11$ & $3.09$ & $5.21$ & $3.41$ & $1.88$ & $3.31$ & $4.23$ & $3.31$ & $4.42$ & $2.78$ & $2.37$ & $3.41$ & $3.85$ & $3.19$ & $3.42$ & $2.49$ & $1.71$ & $2.85$ & $2.48$ & $2.25$ & $2.33$ & $2.32$ & $16.25$ & $2.63$ & $83.75$ \\
+ZEC & $3.51$ & $3.48$ & $4.01$ & $4.10$ & $2.50$ & $2.82$ & $4.16$ & $2.41$ & $2.08$ & $2.29$ & $4.26$ & $2.51$ & $3.33$ & $3.64$ & $1.93$ & $3.88$ & $2.93$ & $2.64$ & $3.13$ & $2.53$ & $1.80$ & $1.95$ & $2.82$ & $2.18$ & $2.44$ & $1.43$ & $4.82$ & $20.45$ & $79.55$ \\
+\midrule
+\shortstack{Directional\\TO others} & $87.01$ & $82.28$ & $92.40$ & $105.42$ & $80.94$ & $84.53$ & $110.34$ & $84.77$ & $67.22$ & $72.45$ & $102.25$ & $90.69$ & $75.80$ & $81.49$ & $64.23$ & $66.70$ & $78.13$ & $62.74$ & $88.88$ & $64.42$ & $47.61$ & $67.08$ & $76.64$ & $60.43$ & $66.33$ & $50.19$ & $117.30$ & $66.04$ & \\[4pt]
+\shortstack{Directional\\including\\own} & $106.12$ & $100.64$ & $111.06$ & $127.84$ & $101.70$ & $103.07$ & $127.91$ & $104.71$ & $91.56$ & $98.89$ & $119.66$ & $106.97$ & $91.99$ & $100.16$ & $94.14$ & $90.78$ & $97.49$ & $90.54$ & $105.55$ & $87.35$ & $85.27$ & $85.53$ & $93.96$ & $91.33$ & $86.95$ & $78.79$ & $133.55$ & $86.49$ & \\[4pt]
+Net spillover & $6.12$ & $0.64$ & $11.06$ & $27.84$ & $1.70$ & $3.07$ & $27.91$ & $4.71$ & $-8.44$ & $-1.11$ & $19.66$ & $6.97$ & $-8.01$ & $0.16$ & $-5.86$ & $-9.22$ & $-2.51$ & $-9.46$ & $5.55$ & $-12.65$ & $-14.73$ & $-14.47$ & $-6.04$ & $-8.67$ & $-13.05$ & $-21.21$ & $33.55$ & $-13.51$ & \hfill\shortstack[r]{Total spillover index\\ (2194.3/2800): 78.4\%} \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\begin{flushleft}
+    \raggedright
+    \footnotesize
+    \textit{Notes:} This table reports lower-tail risk spillovers across currency markets. The sample period spans from 2020-10-18 to 2026-02-03. The $(i,j)$-th entry represents the estimated contribution of innovations in market $j$ to the forecast error variance of market $i$. The off-diagonal column sums (labeled \emph{Directional TO others}) and row sums (labeled \emph{Directional FROM others}) measure directional spillovers transmitted to and received from other markets, respectively, while the difference between the two (\emph{TO minus FROM}) captures net risk spillovers. The total risk spillover index, reported in the lower-right corner of the table, is defined as the ratio of the sum of all off-diagonal elements to the total sum of all elements (including diagonals), expressed as a percentage. The spillover table thus provides an approximate input--output decomposition of the total spillover index. Risk spillovers are estimated using a generalized vector autoregressive (VAR) framework following Diebold and Yilmaz (2012), based on forecast error variance decompositions of the reciprocal lower-tail index.
+    \end{flushleft}
+\end{table}
+
+\clearpage
+
+\begin{table}[htbp]
+\centering
+\setlength{\tabcolsep}{2pt}
+\caption{Upper-tail volatility spillover table.}
+\label{tab:uptail_spillover}
+\begin{adjustbox}{width=\linewidth}
+\begin{tabular}{@{}lccccccccccccccccccccccccccccc@{}}
+\toprule
+ & AAVE & ALGO & AVAX & BNB & BCH & BTC & ADA & LINK & CRO & DOGE & ETC & ETH & FIL & HBAR & KCS & XMR & NEAR & OKB & DOT & QNT & RNDR & SOL & XLM & TRX & UNI & LEO & VET & ZEC & \shortstack{Directional\\FROM others} \\
+\midrule
+AAVE & $20.94$ & $2.37$ & $5.74$ & $5.02$ & $1.90$ & $2.48$ & $4.28$ & $2.90$ & $1.61$ & $2.86$ & $5.15$ & $4.25$ & $2.96$ & $2.19$ & $2.07$ & $2.44$ & $2.09$ & $1.64$ & $3.27$ & $2.93$ & $1.90$ & $2.33$ & $2.39$ & $2.47$ & $4.51$ & $1.16$ & $3.93$ & $2.20$ & $79.06$ \\
+ALGO & $3.04$ & $23.49$ & $2.87$ & $3.74$ & $1.85$ & $2.52$ & $3.98$ & $2.97$ & $2.83$ & $2.95$ & $3.95$ & $3.13$ & $3.81$ & $3.40$ & $3.27$ & $1.34$ & $3.45$ & $1.11$ & $3.48$ & $1.88$ & $1.96$ & $2.08$ & $3.65$ & $2.86$ & $2.99$ & $1.07$ & $4.34$ & $2.01$ & $76.51$ \\
+AVAX & $3.85$ & $3.13$ & $21.42$ & $4.68$ & $1.64$ & $2.29$ & $4.79$ & $2.80$ & $4.02$ & $2.85$ & $4.82$ & $3.11$ & $3.07$ & $2.12$ & $2.11$ & $2.14$ & $2.73$ & $1.76$ & $2.81$ & $3.43$ & $3.31$ & $2.86$ & $2.45$ & $2.28$ & $1.83$ & $1.08$ & $4.60$ & $2.04$ & $78.58$ \\
+BNB & $1.93$ & $1.86$ & $2.95$ & $25.55$ & $2.82$ & $3.14$ & $4.58$ & $2.13$ & $2.57$ & $2.85$ & $4.81$ & $4.14$ & $2.39$ & $2.32$ & $3.59$ & $2.84$ & $2.38$ & $2.30$ & $1.94$ & $3.23$ & $1.77$ & $2.13$ & $2.63$ & $3.37$ & $1.96$ & $1.29$ & $4.60$ & $1.90$ & $74.45$ \\
+BCH & $2.58$ & $2.23$ & $2.89$ & $3.43$ & $29.19$ & $4.18$ & $3.13$ & $3.34$ & $2.21$ & $3.46$ & $4.14$ & $3.31$ & $2.58$ & $1.77$ & $1.83$ & $2.20$ & $2.10$ & $1.40$ & $3.20$ & $1.80$ & $1.68$ & $2.01$ & $3.71$ & $2.37$ & $2.05$ & $0.85$ & $4.26$ & $2.10$ & $70.81$ \\
+BTC & $3.18$ & $2.41$ & $2.45$ & $4.81$ & $3.58$ & $23.26$ & $3.10$ & $1.99$ & $2.75$ & $4.32$ & $4.43$ & $5.91$ & $2.84$ & $1.95$ & $3.21$ & $1.92$ & $2.09$ & $1.34$ & $2.93$ & $1.84$ & $1.29$ & $2.41$ & $2.83$ & $2.50$ & $2.53$ & $1.06$ & $4.33$ & $2.74$ & $76.74$ \\
+ADA & $3.30$ & $2.96$ & $3.80$ & $4.44$ & $1.64$ & $3.01$ & $21.12$ & $3.09$ & $2.30$ & $3.47$ & $4.49$ & $3.03$ & $3.09$ & $3.30$ & $2.47$ & $1.62$ & $3.24$ & $1.27$ & $3.57$ & $2.90$ & $2.41$ & $2.54$ & $3.75$ & $3.52$ & $2.73$ & $1.44$ & $3.87$ & $1.63$ & $78.88$ \\
+LINK & $2.99$ & $3.03$ & $3.64$ & $2.34$ & $2.45$ & $2.72$ & $4.41$ & $24.83$ & $2.80$ & $2.71$ & $3.73$ & $4.14$ & $3.45$ & $3.34$ & $1.82$ & $1.32$ & $2.78$ & $1.21$ & $4.38$ & $2.04$ & $1.66$ & $2.30$ & $3.39$ & $2.44$ & $2.86$ & $0.94$ & $4.83$ & $1.43$ & $75.17$ \\
+CRO & $2.44$ & $2.22$ & $3.99$ & $5.18$ & $1.90$ & $3.12$ & $4.58$ & $2.36$ & $27.72$ & $2.62$ & $3.75$ & $3.10$ & $3.63$ & $2.87$ & $2.53$ & $1.16$ & $1.81$ & $1.82$ & $2.38$ & $2.95$ & $1.67$ & $2.44$ & $2.97$ & $2.09$ & $2.26$ & $1.08$ & $3.39$ & $1.97$ & $72.28$ \\
+DOGE & $1.68$ & $2.32$ & $2.56$ & $3.01$ & $3.32$ & $4.08$ & $3.93$ & $2.77$ & $2.72$ & $29.20$ & $4.27$ & $4.04$ & $4.09$ & $2.51$ & $1.63$ & $1.45$ & $2.11$ & $1.30$ & $3.60$ & $1.50$ & $1.57$ & $2.62$ & $3.26$ & $1.61$ & $2.19$ & $0.40$ & $4.28$ & $1.99$ & $70.80$ \\
+ETC & $3.65$ & $2.29$ & $3.55$ & $5.51$ & $3.27$ & $2.19$ & $5.18$ & $2.64$ & $2.35$ & $3.39$ & $19.39$ & $4.27$ & $3.16$ & $3.19$ & $2.53$ & $2.12$ & $2.07$ & $1.82$ & $3.16$ & $2.93$ & $1.79$ & $2.79$ & $3.50$ & $3.01$ & $3.43$ & $1.02$ & $3.70$ & $2.11$ & $80.61$ \\
+ETH & $4.95$ & $2.51$ & $3.37$ & $4.27$ & $1.83$ & $4.65$ & $5.02$ & $2.29$ & $2.45$ & $4.06$ & $5.14$ & $19.68$ & $2.65$ & $2.86$ & $1.99$ & $1.67$ & $1.90$ & $1.59$ & $2.58$ & $5.00$ & $1.86$ & $2.48$ & $2.53$ & $2.57$ & $3.29$ & $1.19$ & $3.39$ & $2.19$ & $80.32$ \\
+FIL & $2.55$ & $2.62$ & $3.61$ & $2.67$ & $2.04$ & $3.11$ & $4.24$ & $2.98$ & $2.39$ & $4.93$ & $3.73$ & $3.42$ & $27.39$ & $2.40$ & $1.53$ & $1.12$ & $2.92$ & $1.36$ & $4.04$ & $1.59$ & $2.09$ & $2.21$ & $2.96$ & $1.96$ & $3.11$ & $0.63$ & $4.57$ & $1.86$ & $72.61$ \\
+HBAR & $2.68$ & $3.71$ & $3.03$ & $2.95$ & $2.19$ & $2.04$ & $5.52$ & $3.41$ & $3.60$ & $2.99$ & $3.64$ & $2.86$ & $2.73$ & $24.27$ & $2.96$ & $1.47$ & $2.56$ & $1.60$ & $3.52$ & $2.58$ & $2.07$ & $3.02$ & $3.82$ & $1.97$ & $2.06$ & $0.85$ & $3.40$ & $2.46$ & $75.73$ \\
+KCS & $2.67$ & $2.21$ & $3.46$ & $4.21$ & $2.27$ & $3.35$ & $3.58$ & $2.60$ & $3.08$ & $2.02$ & $2.79$ & $3.15$ & $1.84$ & $3.47$ & $30.33$ & $2.30$ & $2.88$ & $2.10$ & $2.14$ & $1.94$ & $1.42$ & $2.18$ & $3.12$ & $2.15$ & $2.71$ & $1.03$ & $2.93$ & $2.07$ & $69.67$ \\
+XMR & $2.07$ & $2.37$ & $2.21$ & $2.67$ & $2.11$ & $3.22$ & $2.87$ & $2.53$ & $2.02$ & $2.23$ & $2.47$ & $2.06$ & $2.05$ & $2.38$ & $2.19$ & $36.50$ & $2.16$ & $1.62$ & $2.85$ & $2.46$ & $1.75$ & $2.41$ & $2.60$ & $3.07$ & $2.39$ & $1.00$ & $2.83$ & $2.92$ & $63.50$ \\
+NEAR & $2.79$ & $2.69$ & $3.83$ & $3.87$ & $1.40$ & $2.90$ & $4.28$ & $2.56$ & $2.44$ & $2.80$ & $3.87$ & $2.76$ & $3.13$ & $2.52$ & $2.80$ & $2.11$ & $27.90$ & $1.13$ & $3.68$ & $2.47$ & $2.33$ & $2.67$ & $1.84$ & $1.40$ & $2.40$ & $1.06$ & $4.32$ & $2.03$ & $72.10$ \\
+OKB & $1.94$ & $1.82$ & $1.78$ & $3.26$ & $1.80$ & $2.59$ & $2.53$ & $1.57$ & $3.09$ & $2.22$ & $3.00$ & $3.71$ & $2.30$ & $1.99$ & $2.68$ & $1.67$ & $1.63$ & $41.67$ & $2.18$ & $1.61$ & $1.49$ & $2.33$ & $2.25$ & $1.90$ & $1.77$ & $1.16$ & $2.57$ & $1.50$ & $58.33$ \\
+DOT & $2.49$ & $3.65$ & $4.09$ & $2.59$ & $2.25$ & $2.47$ & $4.29$ & $3.90$ & $2.94$ & $3.24$ & $3.60$ & $2.96$ & $4.46$ & $2.93$ & $1.89$ & $2.17$ & $3.17$ & $1.55$ & $23.69$ & $2.26$ & $2.11$ & $2.28$ & $2.69$ & $1.86$ & $2.87$ & $0.83$ & $5.06$ & $1.70$ & $76.31$ \\
+QNT & $3.81$ & $2.20$ & $3.48$ & $3.28$ & $2.61$ & $3.05$ & $2.71$ & $2.21$ & $2.94$ & $2.21$ & $4.28$ & $4.35$ & $2.08$ & $2.54$ & $2.59$ & $2.15$ & $1.87$ & $1.19$ & $2.24$ & $28.31$ & $1.99$ & $2.81$ & $1.93$ & $2.25$ & $3.21$ & $1.32$ & $4.09$ & $2.31$ & $71.69$ \\
+RNDR & $1.90$ & $2.45$ & $4.59$ & $2.08$ & $1.75$ & $2.16$ & $2.77$ & $1.89$ & $3.27$ & $2.88$ & $3.18$ & $2.48$ & $2.68$ & $2.37$ & $0.81$ & $1.51$ & $2.14$ & $1.34$ & $2.98$ & $2.43$ & $40.14$ & $2.45$ & $1.53$ & $1.42$ & $1.55$ & $0.97$ & $3.15$ & $1.15$ & $59.86$ \\
+SOL & $3.99$ & $1.57$ & $3.54$ & $4.49$ & $2.00$ & $2.84$ & $5.25$ & $2.37$ & $2.46$ & $2.80$ & $4.25$ & $4.70$ & $2.28$ & $3.71$ & $3.13$ & $2.09$ & $2.44$ & $1.78$ & $2.57$ & $3.23$ & $2.37$ & $21.18$ & $3.41$ & $2.32$ & $2.76$ & $0.85$ & $3.47$ & $2.17$ & $78.82$ \\
+XLM & $2.72$ & $3.71$ & $2.08$ & $3.23$ & $3.14$ & $3.13$ & $4.30$ & $2.52$ & $3.10$ & $3.72$ & $4.01$ & $3.17$ & $3.86$ & $3.46$ & $2.05$ & $1.49$ & $2.27$ & $1.59$ & $2.83$ & $1.83$ & $1.30$ & $2.57$ & $25.95$ & $2.90$ & $2.14$ & $0.99$ & $3.65$ & $2.30$ & $74.05$ \\
+TRX & $2.34$ & $2.44$ & $2.54$ & $4.02$ & $2.56$ & $2.65$ & $3.68$ & $2.00$ & $2.59$ & $2.19$ & $3.82$ & $2.87$ & $2.66$ & $2.39$ & $1.75$ & $2.77$ & $1.45$ & $1.33$ & $2.51$ & $3.30$ & $1.71$ & $1.77$ & $3.88$ & $29.53$ & $2.60$ & $1.55$ & $4.41$ & $2.70$ & $70.47$ \\
+UNI & $6.19$ & $2.55$ & $3.74$ & $1.73$ & $1.58$ & $2.45$ & $5.03$ & $3.28$ & $2.73$ & $2.63$ & $5.61$ & $4.99$ & $3.26$ & $3.18$ & $2.23$ & $1.58$ & $2.72$ & $1.15$ & $3.39$ & $3.12$ & $1.83$ & $3.25$ & $2.08$ & $2.01$ & $22.23$ & $0.81$ & $3.14$ & $1.49$ & $77.77$ \\
+LEO & $1.58$ & $2.12$ & $2.23$ & $2.11$ & $1.55$ & $1.56$ & $2.55$ & $1.91$ & $1.90$ & $1.05$ & $1.71$ & $1.60$ & $1.75$ & $2.02$ & $1.58$ & $1.43$ & $1.29$ & $1.58$ & $1.94$ & $1.68$ & $1.51$ & $1.63$ & $1.44$ & $2.04$ & $1.71$ & $52.78$ & $2.04$ & $1.72$ & $47.22$ \\
+VET & $2.72$ & $3.40$ & $3.00$ & $3.23$ & $2.36$ & $3.10$ & $5.11$ & $3.25$ & $2.72$ & $3.61$ & $3.72$ & $3.11$ & $4.87$ & $2.57$ & $2.44$ & $1.64$ & $3.33$ & $1.52$ & $3.73$ & $2.70$ & $2.20$ & $2.57$ & $2.96$ & $2.66$ & $2.58$ & $0.85$ & $22.22$ & $1.82$ & $77.78$ \\
+ZEC & $2.82$ & $2.56$ & $2.91$ & $3.16$ & $3.19$ & $3.02$ & $2.93$ & $1.62$ & $2.23$ & $2.97$ & $3.58$ & $2.91$ & $3.08$ & $2.64$ & $2.01$ & $2.02$ & $2.14$ & $1.68$ & $2.48$ & $1.86$ & $1.78$ & $2.12$ & $2.84$ & $3.02$ & $2.82$ & $0.89$ & $3.35$ & $31.37$ & $68.63$ \\
+\midrule
+\shortstack{Directional\\TO others} & $78.83$ & $69.41$ & $87.95$ & $95.99$ & $61.02$ & $78.00$ & $108.62$ & $69.89$ & $72.10$ & $80.02$ & $105.96$ & $93.53$ & $80.77$ & $72.36$ & $61.69$ & $49.74$ & $63.71$ & $41.09$ & $80.39$ & $67.51$ & $50.81$ & $65.25$ & $76.41$ & $64.02$ & $69.30$ & $27.40$ & $102.48$ & $54.52$ & \\[4pt]
+\shortstack{Directional\\including\\own} & $99.77$ & $92.90$ & $109.37$ & $121.54$ & $90.21$ & $101.27$ & $129.74$ & $94.71$ & $99.82$ & $109.21$ & $125.35$ & $113.21$ & $108.17$ & $96.63$ & $92.02$ & $86.24$ & $91.61$ & $82.75$ & $104.08$ & $95.82$ & $90.95$ & $86.43$ & $102.36$ & $93.55$ & $91.53$ & $80.18$ & $124.69$ & $85.88$ & \\[4pt]
+Net spillover & $-0.23$ & $-7.10$ & $9.37$ & $21.54$ & $-9.79$ & $1.27$ & $29.74$ & $-5.29$ & $-0.18$ & $9.21$ & $25.35$ & $13.21$ & $8.17$ & $-3.37$ & $-7.98$ & $-13.76$ & $-8.39$ & $-17.25$ & $4.08$ & $-4.18$ & $-9.05$ & $-13.57$ & $2.36$ & $-6.45$ & $-8.47$ & $-19.82$ & $24.69$ & $-14.12$ & \hfill\shortstack[r]{Total spillover index\\ (2028.8/2800): 72.5\%} \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\begin{flushleft}
+    \raggedright
+    \footnotesize
+    \textit{Notes:} This table reports upper-tail risk spillovers across cryptocurrency markets. The sample period spans from 2020-10-18 to 2026-02-03. The $(i,j)$-th entry represents the estimated contribution of innovations in market $j$ to the forecast error variance of market $i$. The off-diagonal column sums (labeled \emph{Directional TO others}) and row sums (labeled \emph{Directional FROM others}) measure directional spillovers transmitted to and received from other markets, respectively, while the difference between the two (\emph{TO minus FROM}) captures net risk spillovers. The total risk spillover index, reported in the lower-right corner of the table, is defined as the ratio of the sum of all off-diagonal elements to the total sum of all elements (including diagonals), expressed as a percentage. The spillover table thus provides an approximate input--output decomposition of the total spillover index. Risk spillovers are estimated using a generalized vector autoregressive (VAR) framework following Diebold and Yilmaz (2012), based on forecast error variance decompositions of the reciprocal upper-tail index.
+    \end{flushleft}
+\end{table}
+\end{landscape}
+
+\clearpage
+
+% price plot
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/price_plot/AAVE.pdf}
+  {\small AAVE}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/price_plot/ADA.pdf}
+  {\small ADA}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/price_plot/ALGO.pdf}
+  {\small ALGO}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/price_plot/AVAX.pdf}
+  {\small AVAX}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/price_plot/BCH.pdf}
+  {\small BCH}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/price_plot/BNB.pdf}
+  {\small BNB}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/price_plot/BTC.pdf}
+  {\small BTC}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/price_plot/CRO.pdf}
+  {\small CRO}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/price_plot/DOGE.pdf}
+  {\small DOGE}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/price_plot/DOT.pdf}
+  {\small DOT}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/price_plot/ETC.pdf}
+  {\small ETC}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/price_plot/ETH.pdf}
+  {\small ETH}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/price_plot/FIL.pdf}
+  {\small FIL}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/price_plot/HBAR.pdf}
+  {\small HBAR}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/price_plot/KCS.pdf}
+  {\small KCS}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/price_plot/LEO.pdf}
+  {\small LEO}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/price_plot/LINK.pdf}
+  {\small LINK}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/price_plot/LTC.pdf}
+  {\small LTC}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/price_plot/NEAR.pdf}
+  {\small NEAR}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/price_plot/OKB.pdf}
+  {\small OKB}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/price_plot/QNT.pdf}
+  {\small QNT}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/price_plot/RNDR.pdf}
+  {\small RNDR}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/price_plot/SOL.pdf}
+  {\small SOL}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/price_plot/TRX.pdf}
+  {\small TRX}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/price_plot/UNI.pdf}
+  {\small UNI}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/price_plot/VET.pdf}
+  {\small VET}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/price_plot/XDC.pdf}
+  {\small XDC}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/price_plot/XLM.pdf}
+  {\small XLM}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/price_plot/XMR.pdf}
+  {\small XMR}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/price_plot/ZEC.pdf}
+  {\small ZEC}
+\end{minipage}%
+\hfill%
+
+% Notes for price plot
+\vspace{1em}
+{\centering
+Figure X: Time series of different cryptocurrency daily close prices\\
+}
+\vspace{0.5em}
+{\raggedright \footnotesize
+\textit{Notes:} The sample period spans from 2020-10-18 to 2026-02-03.
+}
+\vspace{4em}
+
+\clearpage
+
+% return plot
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/return_plot/AAVE.pdf}
+  {\small AAVE}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/return_plot/ADA.pdf}
+  {\small ADA}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/return_plot/ALGO.pdf}
+  {\small ALGO}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/return_plot/AVAX.pdf}
+  {\small AVAX}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/return_plot/BCH.pdf}
+  {\small BCH}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/return_plot/BNB.pdf}
+  {\small BNB}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/return_plot/BTC.pdf}
+  {\small BTC}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/return_plot/CRO.pdf}
+  {\small CRO}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/return_plot/DOGE.pdf}
+  {\small DOGE}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/return_plot/DOT.pdf}
+  {\small DOT}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/return_plot/ETC.pdf}
+  {\small ETC}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/return_plot/ETH.pdf}
+  {\small ETH}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/return_plot/FIL.pdf}
+  {\small FIL}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/return_plot/HBAR.pdf}
+  {\small HBAR}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/return_plot/KCS.pdf}
+  {\small KCS}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/return_plot/LEO.pdf}
+  {\small LEO}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/return_plot/LINK.pdf}
+  {\small LINK}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/return_plot/LTC.pdf}
+  {\small LTC}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/return_plot/NEAR.pdf}
+  {\small NEAR}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/return_plot/OKB.pdf}
+  {\small OKB}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/return_plot/QNT.pdf}
+  {\small QNT}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/return_plot/RNDR.pdf}
+  {\small RNDR}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/return_plot/SOL.pdf}
+  {\small SOL}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/return_plot/TRX.pdf}
+  {\small TRX}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/return_plot/UNI.pdf}
+  {\small UNI}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/return_plot/VET.pdf}
+  {\small VET}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/return_plot/XDC.pdf}
+  {\small XDC}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/return_plot/XLM.pdf}
+  {\small XLM}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/return_plot/XMR.pdf}
+  {\small XMR}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/return_plot/ZEC.pdf}
+  {\small ZEC}
+\end{minipage}%
+\hfill%
+
+% Notes for return plot
+\vspace{1em}
+{\centering
+Figure X: Time series of different cryptocurrency daily log-returns\\
+}
+\vspace{0.5em}
+{\raggedright \footnotesize
+\textit{Notes:} The sample period spans from 2020-10-18 to 2026-02-03.
+}
+\vspace{4em}
+
+\clearpage
+
+% % tail index and sigma (scale parameter) images
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_xi_exc/AAVE.pdf}
+  {\small AAVE}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_xi_exc/ADA.pdf}
+  {\small ADA}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_xi_exc/ALGO.pdf}
+  {\small ALGO}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_xi_exc/AVAX.pdf}
+  {\small AVAX}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_xi_exc/BCH.pdf}
+  {\small BCH}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_xi_exc/BNB.pdf}
+  {\small BNB}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_xi_exc/BTC.pdf}
+  {\small BTC}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_xi_exc/CRO.pdf}
+  {\small CRO}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_xi_exc/DOGE.pdf}
+  {\small DOGE}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_xi_exc/DOT.pdf}
+  {\small DOT}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_xi_exc/ETC.pdf}
+  {\small ETC}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_xi_exc/ETH.pdf}
+  {\small ETH}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_xi_exc/FIL.pdf}
+  {\small FIL}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_xi_exc/HBAR.pdf}
+  {\small HBAR}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_xi_exc/KCS.pdf}
+  {\small KCS}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_xi_exc/LEO.pdf}
+  {\small LEO}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_xi_exc/LINK.pdf}
+  {\small LINK}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_xi_exc/NEAR.pdf}
+  {\small NEAR}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_xi_exc/OKB.pdf}
+  {\small OKB}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_xi_exc/QNT.pdf}
+  {\small QNT}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_xi_exc/RNDR.pdf}
+  {\small RNDR}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_xi_exc/SOL.pdf}
+  {\small SOL}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_xi_exc/TRX.pdf}
+  {\small TRX}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_xi_exc/UNI.pdf}
+  {\small UNI}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_xi_exc/VET.pdf}
+  {\small VET}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_xi_exc/XLM.pdf}
+  {\small XLM}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_xi_exc/XMR.pdf}
+  {\small XMR}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_xi_exc/ZEC.pdf}
+  {\small ZEC}
+\end{minipage}%
+
+% Notes for Lower-tail P_xi_exc
+\vspace{1em}
+{\centering
+Figure X: Lower-Tail Risk Index and Negative Return Exceedances across Cryptocurrencies\\
+}
+\vspace{0.5em}
+{\raggedright \footnotesize
+\textit{Notes:} The red solid line represents the lower-tail index. This tail index is determined by the estimated parameters reported in Table X. The black vertical bars denote negative return exceedances beyond a predefined hurdle, which is set at the 95\% quantile. As part of robustness checks, we also construct lower-tail indices using the 85\% and 90\% quantiles as alternative hurdles. The results indicate that the lower-tail index is robust to the choice of the threshold, and the corresponding figures are available from the authors upon request. Gray shaded bands highlight periods during which the tail index declines sharply. According to the peaks-over-threshold framework, a sharp decline in the tail index signals a rapid intensification of tail risk. Notably, these shaded intervals closely align with major cryptocurrency events.
+}
+\vspace{4em}
+
+\clearpage
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_std_sigma/AAVE.pdf}
+  {\small AAVE}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_std_sigma/ADA.pdf}
+  {\small ADA}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_std_sigma/ALGO.pdf}
+  {\small ALGO}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_std_sigma/AVAX.pdf}
+  {\small AVAX}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_std_sigma/BCH.pdf}
+  {\small BCH}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_std_sigma/BNB.pdf}
+  {\small BNB}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_std_sigma/BTC.pdf}
+  {\small BTC}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_std_sigma/CRO.pdf}
+  {\small CRO}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_std_sigma/DOGE.pdf}
+  {\small DOGE}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_std_sigma/DOT.pdf}
+  {\small DOT}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_std_sigma/ETC.pdf}
+  {\small ETC}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_std_sigma/ETH.pdf}
+  {\small ETH}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_std_sigma/FIL.pdf}
+  {\small FIL}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_std_sigma/HBAR.pdf}
+  {\small HBAR}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_std_sigma/KCS.pdf}
+  {\small KCS}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_std_sigma/LEO.pdf}
+  {\small LEO}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_std_sigma/LINK.pdf}
+  {\small LINK}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_std_sigma/NEAR.pdf}
+  {\small NEAR}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_std_sigma/OKB.pdf}
+  {\small OKB}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_std_sigma/QNT.pdf}
+  {\small QNT}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_std_sigma/RNDR.pdf}
+  {\small RNDR}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_std_sigma/SOL.pdf}
+  {\small SOL}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_std_sigma/TRX.pdf}
+  {\small TRX}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_std_sigma/UNI.pdf}
+  {\small UNI}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_std_sigma/VET.pdf}
+  {\small VET}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_std_sigma/XLM.pdf}
+  {\small XLM}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_std_sigma/XMR.pdf}
+  {\small XMR}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/P_std_sigma/ZEC.pdf}
+  {\small ZEC}
+\end{minipage}%
+
+% Notes for Lower-tail P_std_sigma
+\vspace{1em}
+{\centering
+Figure X: Standardized Dynamic Volatility of Negative Returns across Cryptocurrencies\\
+}
+\vspace{0.5em}
+{\raggedright \footnotesize
+\textit{Notes:} The red solid line depicts the standardized dynamic conditional volatility estimated using the GARCH(1,1) model, while the blue line shows the standardized dynamic conditional volatility obtained from the univariate peaks-over-threshold (uPOT) model, with parameters reported in Table X. The key hyperparameter of the uPOT model is the threshold, which is set at the 95\% quantile. As part of robustness checks, we also construct standardized volatilities using the 85\% and 90\% quantiles as alternative thresholds. The results indicate that the standardized volatility estimates are robust to the choice of the threshold, and the corresponding figures are available from the authors upon request. A closer alignment between the two volatility series indicates greater reliability of the uPOT model estimation.
+}
+\vspace{4em}
+
+\clearpage
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_xi_exc/AAVE.pdf}
+  {\small AAVE}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_xi_exc/ADA.pdf}
+  {\small ADA}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_xi_exc/ALGO.pdf}
+  {\small ALGO}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_xi_exc/AVAX.pdf}
+  {\small AVAX}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_xi_exc/BCH.pdf}
+  {\small BCH}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_xi_exc/BNB.pdf}
+  {\small BNB}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_xi_exc/BTC.pdf}
+  {\small BTC}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_xi_exc/CRO.pdf}
+  {\small CRO}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_xi_exc/DOGE.pdf}
+  {\small DOGE}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_xi_exc/DOT.pdf}
+  {\small DOT}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_xi_exc/ETC.pdf}
+  {\small ETC}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_xi_exc/ETH.pdf}
+  {\small ETH}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_xi_exc/FIL.pdf}
+  {\small FIL}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_xi_exc/HBAR.pdf}
+  {\small HBAR}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_xi_exc/KCS.pdf}
+  {\small KCS}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_xi_exc/LEO.pdf}
+  {\small LEO}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_xi_exc/LINK.pdf}
+  {\small LINK}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_xi_exc/NEAR.pdf}
+  {\small NEAR}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_xi_exc/OKB.pdf}
+  {\small OKB}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_xi_exc/QNT.pdf}
+  {\small QNT}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_xi_exc/RNDR.pdf}
+  {\small RNDR}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_xi_exc/SOL.pdf}
+  {\small SOL}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_xi_exc/TRX.pdf}
+  {\small TRX}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_xi_exc/UNI.pdf}
+  {\small UNI}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_xi_exc/VET.pdf}
+  {\small VET}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_xi_exc/XLM.pdf}
+  {\small XLM}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_xi_exc/XMR.pdf}
+  {\small XMR}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_xi_exc/ZEC.pdf}
+  {\small ZEC}
+\end{minipage}%
+
+% Notes for Upper-tail P_xi_exc
+\vspace{1em}
+{\centering
+Figure X: Upper-Tail Risk Index and Positive Return Exceedances across Cryptocurrencies\\
+}
+\vspace{0.5em}
+{\raggedright \footnotesize
+\textit{Notes:} The red solid line represents the upper-tail index. This tail index is determined by the estimated parameters reported in Table X. The black vertical bars denote positive return exceedances beyond a predefined hurdle, which is set at the 95\% quantile. As part of robustness checks, we also construct upper-tail indices using the 85\% and 90\% quantiles as alternative hurdles. The results indicate that the upper-tail index is robust to the choice of the threshold, and the corresponding figures are available from the authors upon request. Gray shaded bands highlight periods during which the tail index declines sharply. According to the peaks-over-threshold framework, a sharp decline in the tail index signals a rapid intensification of tail risk. Notably, these shaded intervals closely align with major cryptocurrency events.
+}
+\vspace{4em}
+
+\clearpage
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_std_sigma/AAVE.pdf}
+  {\small AAVE}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_std_sigma/ADA.pdf}
+  {\small ADA}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_std_sigma/ALGO.pdf}
+  {\small ALGO}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_std_sigma/AVAX.pdf}
+  {\small AVAX}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_std_sigma/BCH.pdf}
+  {\small BCH}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_std_sigma/BNB.pdf}
+  {\small BNB}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_std_sigma/BTC.pdf}
+  {\small BTC}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_std_sigma/CRO.pdf}
+  {\small CRO}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_std_sigma/DOGE.pdf}
+  {\small DOGE}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_std_sigma/DOT.pdf}
+  {\small DOT}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_std_sigma/ETC.pdf}
+  {\small ETC}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_std_sigma/ETH.pdf}
+  {\small ETH}
+\end{minipage}%
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_std_sigma/FIL.pdf}
+  {\small FIL}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_std_sigma/HBAR.pdf}
+  {\small HBAR}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_std_sigma/KCS.pdf}
+  {\small KCS}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_std_sigma/LEO.pdf}
+  {\small LEO}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_std_sigma/LINK.pdf}
+  {\small LINK}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_std_sigma/NEAR.pdf}
+  {\small NEAR}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_std_sigma/OKB.pdf}
+  {\small OKB}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_std_sigma/QNT.pdf}
+  {\small QNT}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_std_sigma/RNDR.pdf}
+  {\small RNDR}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_std_sigma/SOL.pdf}
+  {\small SOL}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_std_sigma/TRX.pdf}
+  {\small TRX}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_std_sigma/UNI.pdf}
+  {\small UNI}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_std_sigma/VET.pdf}
+  {\small VET}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_std_sigma/XLM.pdf}
+  {\small XLM}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_std_sigma/XMR.pdf}
+  {\small XMR}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/P_std_sigma/ZEC.pdf}
+  {\small ZEC}
+\end{minipage}%
+
+% Notes for Upper-tail P_std_sigma
+\vspace{1em}
+{\centering
+Figure X: Standardized Dynamic Volatility of Positive Returns across Cryptocurrencies\\
+}
+\vspace{0.5em}
+{\raggedright \footnotesize
+\textit{Notes:} The red solid line depicts the standardized dynamic conditional volatility estimated using the GARCH(1,1) model, while the blue line shows the standardized dynamic conditional volatility obtained from the univariate peaks-over-threshold (uPOT) model, with parameters reported in Table X. The key hyperparameter of the uPOT model is the threshold, which is set at the 95\% quantile. As part of robustness checks, we also construct standardized volatilities using the 85\% and 90\% quantiles as alternative thresholds. The results indicate that the standardized volatility estimates are robust to the choice of the threshold, and the corresponding figures are available from the authors upon request. A closer alignment between the two volatility series indicates greater reliability of the uPOT model estimation.
+}
+\vspace{4em}
+
+\clearpage
+
+% downward DY NET spillover plots
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/NET_plots/NET_AAVE.pdf}
+  {\small AAVE}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/NET_plots/NET_ADA.pdf}
+  {\small ADA}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/NET_plots/NET_ALGO.pdf}
+  {\small ALGO}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/NET_plots/NET_AVAX.pdf}
+  {\small AVAX}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/NET_plots/NET_BCH.pdf}
+  {\small BCH}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/NET_plots/NET_BNB.pdf}
+  {\small BNB}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/NET_plots/NET_BTC.pdf}
+  {\small BTC}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/NET_plots/NET_CRO.pdf}
+  {\small CRO}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/NET_plots/NET_DOGE.pdf}
+  {\small DOGE}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/NET_plots/NET_DOT.pdf}
+  {\small DOT}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/NET_plots/NET_ETC.pdf}
+  {\small ETC}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/NET_plots/NET_ETH.pdf}
+  {\small ETH}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/NET_plots/NET_FIL.pdf}
+  {\small FIL}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/NET_plots/NET_HBAR.pdf}
+  {\small HBAR}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/NET_plots/NET_KCS.pdf}
+  {\small KCS}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/NET_plots/NET_LEO.pdf}
+  {\small LEO}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/NET_plots/NET_LINK.pdf}
+  {\small LINK}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/NET_plots/NET_NEAR.pdf}
+  {\small NEAR}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/NET_plots/NET_OKB.pdf}
+  {\small OKB}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/NET_plots/NET_QNT.pdf}
+  {\small QNT}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/NET_plots/NET_RNDR.pdf}
+  {\small RNDR}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/NET_plots/NET_SOL.pdf}
+  {\small SOL}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/NET_plots/NET_TRX.pdf}
+  {\small TRX}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/NET_plots/NET_UNI.pdf}
+  {\small UNI}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/NET_plots/NET_VET.pdf}
+  {\small VET}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/NET_plots/NET_XLM.pdf}
+  {\small XLM}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/NET_plots/NET_XMR.pdf}
+  {\small XMR}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/down_tail/NET_plots/NET_ZEC.pdf}
+  {\small ZEC}
+\end{minipage}%
+
+% Notes for Lower-tail dynamic net spillovers
+\vspace{1.5em}
+{\centering
+Figure X: Lower-Tail Dynamic Net Spillovers across Cryptocurrencies\\
+}
+\vspace{0.5em}
+{\raggedright \footnotesize
+\textit{Notes:} This figure illustrates the dynamic net risk spillovers from each coin to all other coins in the set. Net risk spillovers are computed as the difference between risk spillovers transmitted to other coins and risk spillovers received from them. Risk spillovers are estimated using a generalized vector autoregressive (VAR) framework following Diebold and Yilmaz (2012), based on forecast error variance decompositions of the reciprocal lower-tail index. The rolling-window size of the VAR model is set to 200 days, and the threshold of the univariate peaks-over-threshold (uPOT) model is set at the 95\% quantile. As part of robustness checks, we additionally construct net spillover measures using alternative thresholds at the 85\% and 90\% quantiles, as well as alternative window sizes of 150 and 250 days. The results indicate that the dynamic net spillover estimates are robust to the choice of both the window size and the threshold. The corresponding figures are available from the authors upon request.
+}
+\vspace{4em}
+
+\clearpage
+
+% % upward DY NET spillover plots
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/NET_plots/NET_AAVE.pdf}
+  {\small AAVE}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/NET_plots/NET_ADA.pdf}
+  {\small ADA}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/NET_plots/NET_ALGO.pdf}
+  {\small ALGO}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/NET_plots/NET_AVAX.pdf}
+  {\small AVAX}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/NET_plots/NET_BCH.pdf}
+  {\small BCH}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/NET_plots/NET_BNB.pdf}
+  {\small BNB}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/NET_plots/NET_BTC.pdf}
+  {\small BTC}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/NET_plots/NET_CRO.pdf}
+  {\small CRO}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/NET_plots/NET_DOGE.pdf}
+  {\small DOGE}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/NET_plots/NET_DOT.pdf}
+  {\small DOT}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/NET_plots/NET_ETC.pdf}
+  {\small ETC}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/NET_plots/NET_ETH.pdf}
+  {\small ETH}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/NET_plots/NET_FIL.pdf}
+  {\small FIL}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/NET_plots/NET_HBAR.pdf}
+  {\small HBAR}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/NET_plots/NET_KCS.pdf}
+  {\small KCS}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/NET_plots/NET_LEO.pdf}
+  {\small LEO}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/NET_plots/NET_LINK.pdf}
+  {\small LINK}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/NET_plots/NET_NEAR.pdf}
+  {\small NEAR}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/NET_plots/NET_OKB.pdf}
+  {\small OKB}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/NET_plots/NET_QNT.pdf}
+  {\small QNT}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/NET_plots/NET_RNDR.pdf}
+  {\small RNDR}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/NET_plots/NET_SOL.pdf}
+  {\small SOL}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/NET_plots/NET_TRX.pdf}
+  {\small TRX}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/NET_plots/NET_UNI.pdf}
+  {\small UNI}
+\end{minipage}%
+
+
+% ---- New row ----
+\noindent
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/NET_plots/NET_VET.pdf}
+  {\small VET}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/NET_plots/NET_XLM.pdf}
+  {\small XLM}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/NET_plots/NET_XMR.pdf}
+  {\small XMR}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.24\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{../result/up_tail/NET_plots/NET_ZEC.pdf}
+  {\small ZEC}
+\end{minipage}%
+
+% Notes for Upper-tail dynamic net spillovers
+\vspace{1.5em}
+{\centering
+Figure X: Upper-Tail Dynamic Net Spillovers across Cryptocurrencies\\
+}
+\vspace{0.5em}
+{\raggedright \footnotesize
+\textit{Notes:} This figure illustrates the dynamic net risk spillovers from each coin to all other coins in the set. Net risk spillovers are computed as the difference between risk spillovers transmitted to other coins and risk spillovers received from them. Risk spillovers are estimated using a generalized vector autoregressive (VAR) framework following Diebold and Yilmaz (2012), based on forecast error variance decompositions of the reciprocal upper-tail index. The rolling-window size of the VAR model is set to 200 days, and the threshold of the univariate peaks-over-threshold (uPOT) model is set at the 95\% quantile. As part of robustness checks, we additionally construct net spillover measures using alternative thresholds at the 85\% and 90\% quantiles, as well as alternative window sizes of 150 and 250 days. The results indicate that the dynamic net spillover estimates are robust to the choice of both the window size and the threshold. The corresponding figures are available from the authors upon request.
+}
+\vspace{4em}
+
+\clearpage
+
+% Network plot
+\begin{landscape}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.48\linewidth]{../result/up_tail/NetworkPlot.pdf}
+    \hfill
+    \includegraphics[width=0.48\linewidth]{../result/down_tail/NetworkPlot.pdf}
+    \caption{Upper-tail (left) and Lower-tail (right) network risk spillover, rolling-window size = 200 days, uPOT threshold = 0.95}
+    \label{fig:network_up_down}
+
+    \vspace{0.5em}
+    \begin{minipage}{\linewidth}
+    \footnotesize\raggedright
+    \textit{Notes:} Blue nodes denote net risk spillover transmitters, while orange nodes denote net risk spillover receivers. The size of each node reflects the magnitude of its net risk spillover transmission or net risk absorption intensity. The thickness of each directed edge reflects the magnitude of risk spillovers, with arrows pointing from risk-exporting currencies to risk-importing currencies. Red edges indicate intensities exceeding 50\%.
+    \end{minipage}
+\end{figure}
+\end{landscape}
+
+\end{document}
