@@ -34,10 +34,10 @@ if (!plot.mode){
   registerDoParallel(cl)
   }
 
-setwd("D:/MyFiles/EVT/BTC_POT/code")
-source("Util_UnivPoT.R")
-source("runtime_func.R")
-source("events.R")
+setwd("D:/MyFiles/EVT/Crypto_POT")
+source("./code/POT/Util_UnivPoT.R")
+source("./code/POT/runtime_func.R")
+source("./code/POT/events.R")
 load("./data/panel_dt.RData")
 load("./data/panel_dt_Feb25added.RData")
 set.seed(123)
@@ -61,6 +61,8 @@ init_lower_xi_sigma <- c(1, 0.001)
 # phi_i is parameter for xi, psi_i is parameter for sigma
 upperbound_para <- c(0.3,  0.999,  0.3, 0.3,   0.999, 0.3) # general para
 lowerbound_para <- c(-0.9, 0.4,0.00001, 0.00001, 0.4, 0.00001) # general para
+upperbound_para <- c(0.00135,0.996,0.015,0.3,0.924,0.0085)
+lowerbound_para <- upperbound_para*0.95
 #upperbound_para <- c(0.1,  0.999,  0.5, 0.5,   0.99, 0.01) # another general para
 #lowerbound_para <- c(-0.2, 0.8,0.001, 0.001, 0.7, 0.001) # another general para
 #upperbound_para <- c(0.5, 0.8, 0.05, 0.5,   0.8, 0.05)
@@ -122,7 +124,7 @@ coin.list.est = c("AXS","BAT","BDX","BSV","CAKE","CFX","COMP","CRV","DASH","DCR"
                   "DEXE","FET","GNO","HNT","INJ","IOTA","JST","LUNC","MANA","MX",
                   "NEO","NEXO","SAND","STX","TEL","THETA","TRAC","TWT","XTZ")
 
-curr.coin = "BNB" # for test
+curr.coin = "AAVE" # for test
 for (curr.coin in coin.list.est) {
   try.result = try({
   curr.ts = panel.dt[[curr.coin]] # current time series
