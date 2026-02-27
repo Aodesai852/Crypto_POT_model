@@ -1,37 +1,13 @@
 rm(list = ls())
-setwd("D:/MyFiles/EVT/BTC_POT/code/data")
+setwd("D:/MyFiles/EVT/Crypto_POT/data")
 library("data.table")
-
-stable.coins <- c(
-  "tether",
-  "usd-coin",
-  "dai",
-  "paypal-usd",
-  "tether-gold",
-  "pax-gold",
-  "usds",
-  "global-dollar-usdg",
-  "ethena-usde",
-  "onus-sed-leo",
-  "usd1-wlfi",
-  "decentralized-usd-stablecoin"
-)
 
 files <- list.files("./ori_data", pattern = "\\.csv$", full.names = TRUE)
 
-coins <- sub("_.*", "", basename(files))
+coins <- sub(".csv", "", basename(files))
 
-start.dates <- as.Date(
-  sub(".*_(\\d{4}-\\d{2}-\\d{2})_.*", "\\1", basename(files))
-)
-
-keep <- start.dates < as.Date("2021-01-01") &
-  !coins %in% stable.coins
-
-files.filtered <- files[keep]
-
-dt_list <- lapply(files.filtered, function(f) {
-  coin <- sub("_.*", "", basename(f))  # coin name from filename
+dt_list <- lapply(files, function(f) {
+  coin <- sub(".csv", "", basename(f))  # coin name from filename
   
   dt <- fread(f, select = c("End", "Close"))
   

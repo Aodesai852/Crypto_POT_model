@@ -55,7 +55,7 @@ extract_est <- function(rdata_file) {
 # =========================
 # Process one folder -> write one output .R file
 # =========================
-process_folder <- function(input_dir, output_file) {
+process_folder <- function(input_dir, output_file, UP) {
   if (!dir.exists(input_dir)) stop("Folder not found: ", input_dir)
   
   files <- list.files(input_dir, pattern = "\\.RData$", full.names = TRUE)
@@ -70,7 +70,12 @@ process_folder <- function(input_dir, output_file) {
   
   # Write output script
   lines <- character(0)
-  lines <- c(lines, "est.param <- list(")
+  
+  if (UP){
+    lines <- c(lines, "est.param.up <- list(")}
+  else{
+    lines <- c(lines, "est.param.down <- list(")
+  }
   
   for (i in seq_along(vals)) {
     nm <- names(vals)[i]
@@ -88,5 +93,5 @@ process_folder <- function(input_dir, output_file) {
 # =========================
 # Run for both folders
 # =========================
-process_folder(input_dir_down, output_file_down)
-process_folder(input_dir_up,   output_file_up)
+process_folder(input_dir_down, output_file_down, FALSE)
+process_folder(input_dir_up,   output_file_up, TRUE)
