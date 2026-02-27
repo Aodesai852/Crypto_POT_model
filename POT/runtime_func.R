@@ -244,18 +244,19 @@ get_shadow_area <- function(range_list,xiSigma_timeseries_df){
 
 
 POT_plot <- function(xiSigma_timeseries_df,range_list,curr.coin,NE){
+  # range_list = NULL
   if (NE){
     title = paste("Tail Index and Negative Exceedances of",curr.coin)} else {
     title = paste("Tail Index and Positive Exceedances of",curr.coin)
   }
   scaling = 10 # exc = exc / scaling
-  shadow_area = get_shadow_area(range_list,xiSigma_timeseries_df)
-  xx=shadow_area$xx;yyy=shadow_area$yyy;xmi=shadow_area$xmi;ymi=shadow_area$ymi;ymx=shadow_area$ymx
+  # shadow_area = get_shadow_area(range_list,xiSigma_timeseries_df)
+  # xx=shadow_area$xx;yyy=shadow_area$yyy;xmi=shadow_area$xmi;ymi=shadow_area$ymi;ymx=shadow_area$ymx
   P_xi_exc <- ggplot(xiSigma_timeseries_df, aes(x = date)) +
     geom_line(aes(y = xi, color = "Tail index (top)"), size = 0.6, linetype = "solid", na.rm = TRUE) +
     geom_line(aes(y = ifelse(NE,-1,1)*exceedance/scaling, color = "Exceedances (bottom)"), size = 0.5, linetype = "solid", na.rm = TRUE) +
     scale_color_manual(values = c("Tail index (top)" = "red", "Exceedances (bottom)" = 'black')) +
-    geom_rect(data = shadow_area, aes(xmin = xmi, xmax = xmx, ymin = ymi, ymax = ymx), fill ="#333", alpha = 0.2, inherit.aes = FALSE)+
+    #geom_rect(data = shadow_area, aes(xmin = xmi, xmax = xmx, ymin = ymi, ymax = ymx), fill ="#333", alpha = 0.2, inherit.aes = FALSE)+
     #annotate("text", x = xx, y = yy, label = lab, angle = 90, vjust = 0.3, hjust = 0, size = 4)+
     theme(
       legend.position = "bottom",            
@@ -272,21 +273,7 @@ POT_plot <- function(xiSigma_timeseries_df,range_list,curr.coin,NE){
       axis.title.x = element_blank(),
       axis.title.y = element_blank()
     )+
-    #labs(fill = "", color = "") +
-    #xlab("year") +
-    #ylab("Value") +
     ggtitle(title)+
-    # scale_y_continuous(
-    #   trans = compress_trans(),
-    #   breaks=c(seq(round(min(xiSigma_timeseries_df$exceedance),digits = 2),0,length.out=2),
-    #            seq(0,round(max(xiSigma_timeseries_df$xi),digits = 2),length.out=5)),
-    #   labels=scales::number_format(accuracy = 0.01)(c(seq(round(min(xiSigma_timeseries_df$exceedance),digits = 2),0,length.out=2),
-    #                                                   seq(0,round(max(xiSigma_timeseries_df$xi),digits = 2),length.out=5))),
-    # )+
-    # scale_y_continuous(
-    #   name = NULL,                     # left y-axis
-    #   sec.axis = sec_axis(~.*scaling, name = NULL)   # right y-axis
-    # ) +
     scale_x_date(expand = c(0, 0),date_breaks = "2 year",date_labels = "%Y")
   
   # std_sigma_pot and std_sigma_garch
@@ -307,12 +294,7 @@ POT_plot <- function(xiSigma_timeseries_df,range_list,curr.coin,NE){
       axis.title.x = element_blank(),
       axis.title.y = element_blank()
     )+
-    # scale_y_continuous(breaks =pretty(xiSigma_timeseries_df$std_sigma_pot),
-    #                    labels =scales::number_format(accuracy = 0.01)(pretty(xiSigma_timeseries_df$std_sigma_pot))
-    # )+
     scale_x_date(expand = c(0, 0),date_breaks = "2 year",date_labels = "%Y")+
-    #xlab("year") +
-    #ylab("value") +
     ggtitle(paste("Scale Parameters (Standardized) of", curr.coin))
   
   return(list(P_xi_exc=P_xi_exc,P_std_sigma=P_std_sigma))

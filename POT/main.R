@@ -27,7 +27,7 @@ library(stringr)
 setwd("D:/MyFiles/EVT/Crypto_POT")
 source("./code/POT/Util_UnivPoT.R")
 source("./code/POT/runtime_func.R")
-source("./code/POT/events.R")
+#source("./code/POT/events.R")
 load("./data/panel_dt.RData")
 
 set.seed(123)
@@ -71,7 +71,7 @@ coin.list.est = c("AXS","BAT","BDX","BSV","CAKE","CFX","COMP","CRV","DASH","DCR"
                   "DEXE","FET","GNO","HNT","INJ","IOTA","JST","LUNC","MANA","MX",
                   "NEO","NEXO","SAND","STX","TEL","THETA","TRAC","TWT","XTZ")
 
-curr.coin = "AAVE" # for test
+curr.coin = "BTC" # for test
 for (curr.coin in coin.list.est) {
 
   # start with defaults
@@ -83,13 +83,17 @@ for (curr.coin in coin.list.est) {
   
   # override if coin has selected params
   if (curr.coin %in% names(est.param.up)) {
-    upperbound_para_up <- est.param.up[[curr.coin]] * 1.1
-    lowerbound_para_up <- est.param.up[[curr.coin]] * 0.9
+    upperbound_para_up <- est.param.up[[curr.coin]] * 1.05
+    lowerbound_para_up <- est.param.up[[curr.coin]] * 0.95
+    if (upperbound_para_up[2]>0.999) {upperbound_para_up[2]=0.999}
+    if (upperbound_para_up[5]>0.999) {upperbound_para_up[5]=0.999}
   }
   
   if (curr.coin %in% names(est.param.down)) {
-    upperbound_para_down <- est.param.down[[curr.coin]] * 1.1
-    lowerbound_para_down <- est.param.down[[curr.coin]] * 0.9
+    upperbound_para_down <- est.param.down[[curr.coin]] * 1.05
+    lowerbound_para_down <- est.param.down[[curr.coin]] * 0.95
+    if (upperbound_para_down[2]>0.999) {upperbound_para_down[2]=0.999}
+    if (upperbound_para_down[5]>0.999) {upperbound_para_down[5]=0.999}
   }
   
   curr.ts = panel.dt[[curr.coin]] # current time series
@@ -131,10 +135,12 @@ for (curr.coin in coin.list.est) {
                            lowerbound_para_down,upperbound_para_down,burnin_est,ktype,Sigma_type,tau_global_neg,
                            date,step,curr.coin,NE=TRUE)
   
-  neg_POT_plot <- POT_plot(xiSigma_timeseries_df = neg_optim_result$xiSigma_timeseries_df, range_list = events[[curr.coin]],
+  neg_POT_plot <- POT_plot(xiSigma_timeseries_df = neg_optim_result$xiSigma_timeseries_df, range_list = NULL,
                            curr.coin = curr.coin, NE = TRUE)
   
-  save(neg_optim_result, file = paste0(targer_folder,"down_tail/optim_result/",curr.coin,".RData"))
+  save(neg_optim_result, file = paste0(target_folder,"down_tail/optim_result/",curr.coin,".RData"))
+  
+  save(neg_POT_plot, file = paste0(target_folder,"down_tail/P_handle/",curr.coin,".RData"))
   
   ggsave(paste0(target_folder,"down_tail/P_xi_exc/",curr.coin,".pdf"),       
          plot = neg_POT_plot$P_xi_exc,                     
@@ -148,7 +154,6 @@ for (curr.coin in coin.list.est) {
   
   if (inherits(try.result, "try-error")) {
     message(paste("Error in lowertail", curr.coin, "— skipping to next"))
-    next
   }
   
   try.result = try({
@@ -158,10 +163,12 @@ for (curr.coin in coin.list.est) {
                                    lowerbound_para_up,upperbound_para_up,burnin_est,ktype,Sigma_type,tau_global_pos,
                                    date,step,curr.coin,NE=FALSE)
   
-  pos_POT_plot <- POT_plot(xiSigma_timeseries_df = pos_optim_result$xiSigma_timeseries_df, range_list = events[[curr.coin]],
+  pos_POT_plot <- POT_plot(xiSigma_timeseries_df = pos_optim_result$xiSigma_timeseries_df, range_list = NULL,
                            curr.coin = curr.coin, NE=FALSE)
   
-  save(pos_optim_result, file = paste0(targer_folder,"up_tail/optim_result/",curr.coin,".RData"))
+  save(pos_optim_result, file = paste0(target_folder,"up_tail/optim_result/",curr.coin,".RData"))
+  
+  save(pos_POT_plot, file = paste0(target_folder,"up_tail/P_handle/",curr.coin,".RData"))
   
   ggsave(paste0(target_folder,"up_tail/P_xi_exc/",curr.coin,".pdf"),       
          plot = pos_POT_plot$P_xi_exc,                     
@@ -175,11 +182,9 @@ for (curr.coin in coin.list.est) {
   
   if (inherits(try.result, "try-error")) {
     message(paste("Error in uppertail", curr.coin, "— skipping to next"))
-    next
   }
   
 }
 
-# Stop cluster
-if (!plot.mode){
-  stopCluster(cl)}
+
+stopCluster(cl)
