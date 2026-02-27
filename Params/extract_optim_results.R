@@ -4,14 +4,14 @@ setwd("D:/MyFiles/EVT/Crypto_POT")
 # =========================
 # Inputs
 # =========================
-input_dir_down <- "./result_prior/down_tail/optim_result"
-input_dir_up   <- "./result_prior/up_tail/optim_result"
+input_dir_down <- "./result/POT/percent95/down_tail/optim_result"
+input_dir_up   <- "./result/POT/percent95/up_tail/optim_result"
 
 # =========================
 # Outputs
 # =========================
-output_file_down <- "./code/Params/est_param_down.R"
-output_file_up   <- "./code/Params/est_param_up.R"
+output_file_down <- "./code/Params/est_param_down_temp.R"
+output_file_up   <- "./code/Params/est_param_up_temp.R"
 
 # =========================
 # Helper: numeric vector -> "c(a, b, ...)" string

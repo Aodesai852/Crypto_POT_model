@@ -28,20 +28,24 @@ setwd("D:/MyFiles/EVT/Crypto_POT")
 source("./code/POT/Util_UnivPoT.R")
 source("./code/POT/runtime_func.R")
 source("./code/POT/events.R")
-source("./code/Params/est_param_down.R")
-source("./code/Params/est_param_up.R")
 load("./data/panel_dt.RData")
 
 set.seed(123)
 
+###########################################
+################ changable ################
 q = 0.95 # main:0.95; rob:0.90/0.85
-step <- 0.001
+target_folder = "./result/POT/percent95/"
+source("./code/Params/est_param_down_95.R")
+source("./code/Params/est_param_up_95.R")
+###########################################
 
 # Setup parallel backend
 cl <- makeCluster(detectCores()/2)
 registerDoParallel(cl)
 
 # hyper-parameters
+step <- 0.001
 num_of_para <- 6
 scale_factor <- 100
 Sigma_type <- "Square_Sigma"; # "Log_Sigma"
@@ -62,17 +66,20 @@ lowerbound_para_default <- c(0,     0.4, 0.00001, 0.00001,   0.4, 0.00001) # gen
 panel.dt = na.omit(panel.dt)
 
 # choose which coins you want to estimate
-coin.list.est = colnames(panel.dt)[-1]
-# coin.list.est = c("AXS","BAT","BDX","BSV","CAKE","CFX","COMP","CRV","DASH","DCR",
-#                   "DEXE","FET","GNO","HNT","INJ","IOTA","JST","LUNC","MANA","MX",
-#                   "NEO","NEXO","SAND","STX","TEL","THETA","TRAC","TWT","XTZ")
+#coin.list.est = colnames(panel.dt)[-1]
+coin.list.est = c("AXS","BAT","BDX","BSV","CAKE","CFX","COMP","CRV","DASH","DCR",
+                  "DEXE","FET","GNO","HNT","INJ","IOTA","JST","LUNC","MANA","MX",
+                  "NEO","NEXO","SAND","STX","TEL","THETA","TRAC","TWT","XTZ")
 
 curr.coin = "AAVE" # for test
 for (curr.coin in coin.list.est) {
 
   # start with defaults
-  upperbound_para <- upperbound_para_default
-  lowerbound_para <- lowerbound_para_default
+  upperbound_para_up <- upperbound_para_default
+  lowerbound_para_up <- lowerbound_para_default
+  
+  upperbound_para_down <- upperbound_para_default
+  lowerbound_para_down <- lowerbound_para_default
   
   # override if coin has selected params
   if (curr.coin %in% names(est.param.up)) {
@@ -108,12 +115,12 @@ for (curr.coin in coin.list.est) {
   obs_pos[obs_pos < 0] = 0
   
   # save the descriptive results
-  save(ret.desc.stats, file = paste0("./result/ret_desc_stats/",curr.coin,".RData"))
-  ggsave(paste0("./result/return_plot/", curr.coin, ".pdf"),       
+  save(ret.desc.stats, file = paste0(target_folder,"ret_desc_stats/",curr.coin,".RData"))
+  ggsave(paste0(target_folder,"return_plot/", curr.coin, ".pdf"),       
          plot = ret_plot_handle,                     
          width = 8, height = 4)        # inches
   
-  ggsave(paste0("./result/price_plot/", curr.coin, ".pdf"),       
+  ggsave(paste0(target_folder,"price_plot/", curr.coin, ".pdf"),       
          plot = price_plot_handle,                     
          width = 8, height = 4)        # inches
   
@@ -127,13 +134,13 @@ for (curr.coin in coin.list.est) {
   neg_POT_plot <- POT_plot(xiSigma_timeseries_df = neg_optim_result$xiSigma_timeseries_df, range_list = events[[curr.coin]],
                            curr.coin = curr.coin, NE = TRUE)
   
-  save(neg_optim_result, file = paste0("./result/rob_test/",sprintf("%.2f", q),"/down_tail/optim_result/",curr.coin,".RData"))
+  save(neg_optim_result, file = paste0(targer_folder,"down_tail/optim_result/",curr.coin,".RData"))
   
-  ggsave(paste0("./result/rob_test/",sprintf("%.2f", q),"/down_tail/P_xi_exc/pdf/",curr.coin,".pdf"),       
+  ggsave(paste0(target_folder,"down_tail/P_xi_exc/",curr.coin,".pdf"),       
          plot = neg_POT_plot$P_xi_exc,                     
          width = 8, height = 4)        # inches
   
-  ggsave(paste0("./result/rob_test/",sprintf("%.2f", q),"/down_tail/P_std_sigma/pdf/",curr.coin,".pdf"),       
+  ggsave(paste0(target_folder,"down_tail/P_std_sigma/",curr.coin,".pdf"),       
          plot = neg_POT_plot$P_std_sigma,                     
          width = 8, height = 4)        # inches
   
@@ -154,12 +161,13 @@ for (curr.coin in coin.list.est) {
   pos_POT_plot <- POT_plot(xiSigma_timeseries_df = pos_optim_result$xiSigma_timeseries_df, range_list = events[[curr.coin]],
                            curr.coin = curr.coin, NE=FALSE)
   
-  save(pos_optim_result, file = paste0("./result/rob_test/",sprintf("%.2f", q),"/up_tail/optim_result/",curr.coin,".RData"))
-  ggsave(paste0("./result/rob_test/",sprintf("%.2f", q),"/up_tail/P_xi_exc/pdf/",curr.coin,".pdf"),       
+  save(pos_optim_result, file = paste0(targer_folder,"up_tail/optim_result/",curr.coin,".RData"))
+  
+  ggsave(paste0(target_folder,"up_tail/P_xi_exc/",curr.coin,".pdf"),       
          plot = pos_POT_plot$P_xi_exc,                     
          width = 8, height = 4)        # inches
   
-  ggsave(paste0("./result/rob_test/",sprintf("%.2f", q),"/up_tail/P_std_sigma/pdf/",curr.coin,".pdf"),       
+  ggsave(paste0(target_folder,"up_tail/P_std_sigma/",curr.coin,".pdf"),       
          plot = pos_POT_plot$P_std_sigma,                     
          width = 8, height = 4)        # inches
   
