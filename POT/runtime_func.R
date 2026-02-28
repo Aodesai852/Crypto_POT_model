@@ -166,12 +166,61 @@ optim_result <- function(raw_obs,obs,num_of_para,init_lower_xi_sigma,init_upper_
   xiSigma_timeseries_df = data.frame(date=date, recoverXiSigma_univPOT_garch(para = est_para, raw_obs = raw_obs, init = init_xi_sigma, Sigma_type = Sigma_type), exceedance = obs*ifelse(NE,-1,1))
   # xiSigma_timeseries_df has four columns, date, xi, sigma, and PE/NE
   
-  # GARCH
-  sGARCHspec<-ugarchspec(mean.model = list(armaOrder=c(0,0),include.mean=FALSE),
-                         variance.model = list(model="sGARCH",garchOrder=c(1,1)),
-                         distribution.model = "norm")
-  sGARCHfit <- ugarchfit(sGARCHspec,data=raw_obs)
-  if(any(is.null(sGARCHfit@fit$sigma))){print("Null in garch model!")}
+  # # GARCH
+  # sGARCHspec<-ugarchspec(mean.model = list(armaOrder=c(0,0),include.mean=FALSE),
+  #                        variance.model = list(model="sGARCH",garchOrder=c(1,1)),
+  #                        distribution.model = "norm")
+  # sGARCHfit <- ugarchfit(sGARCHspec,data=raw_obs)
+  # if(any(is.null(sGARCHfit@fit$sigma))){print("Null in garch model!")}
+  
+  # GARCH (try norm first, fallback to std if failed)
+  
+  # normal dist. first
+  sGARCHspec_norm <- ugarchspec(
+    mean.model = list(armaOrder=c(0,0), include.mean=FALSE),
+    variance.model = list(model="sGARCH", garchOrder=c(1,1)),
+    distribution.model = "norm"
+  )
+  
+  sGARCHfit <- tryCatch(
+    ugarchfit(sGARCHspec_norm, data=raw_obs),
+    error = function(e) NULL
+  )
+  
+  # check if succeed
+  ok_norm <- !is.null(sGARCHfit) &&
+    sGARCHfit@fit$convergence == 0 &&
+    !is.null(sGARCHfit@fit$sigma) &&
+    all(is.finite(sGARCHfit@fit$sigma))
+  
+  if (!ok_norm) {
+    
+    message("Normal GARCH failed. Switching to t-distribution + hybrid solver.")
+    
+    # if failed: try t dist. + hybrid
+    sGARCHspec_std <- ugarchspec(
+      mean.model = list(armaOrder=c(0,0), include.mean=FALSE),
+      variance.model = list(model="sGARCH", garchOrder=c(1,1)),
+      distribution.model = "std"
+    )
+    
+    sGARCHfit <- tryCatch(
+      ugarchfit(sGARCHspec_std, data=raw_obs, solver="hybrid"),
+      error = function(e) NULL
+    )
+    
+    ok_std <- !is.null(sGARCHfit) &&
+      sGARCHfit@fit$convergence == 0 &&
+      !is.null(sGARCHfit@fit$sigma) &&
+      all(is.finite(sGARCHfit@fit$sigma))
+    
+    if (!ok_std) {
+      message("GARCH failed even after fallback.")
+    } else {
+      message("GARCH succeeded with t-distribution.")
+    }
+    
+  }
   
   # Standardization
   std_sigma_pot=(xiSigma_timeseries_df$sigma-mean(xiSigma_timeseries_df$sigma))/sd(xiSigma_timeseries_df$sigma)

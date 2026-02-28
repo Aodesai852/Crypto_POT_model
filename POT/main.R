@@ -56,25 +56,27 @@ init_lower_xi_sigma <- c(1, 0.001)
 
 # (phi_0 (constant term),phi_1(beta term),phi_2(alpha term),psi_0(constant term),psi_1(beta term),psi_2(alpha term))
 # phi_i is parameter for xi, psi_i is parameter for sigma
-upperbound_para_default <- c(0.3, 0.999,     0.3,     0.3, 0.999,     0.3) # general para
-lowerbound_para_default <- c(0,     0.4, 0.00001, 0.00001,   0.4, 0.00001) # general para
-#upperbound_para_default <- c(0.1,  0.999,  0.5, 0.5,   0.99, 0.01) # another general para
-#lowerbound_para_default <- c(-0.2, 0.8,0.001, 0.001, 0.7, 0.001) # another general para
+#upperbound_para_default <- c(0.3, 0.999,     0.3,     0.3, 0.999,     0.3) # general para
+#lowerbound_para_default <- c(0,     0.4, 0.00001, 0.00001,   0.4, 0.00001) # general para
+upperbound_para_default <- c(0.1, 0.999,   0.5,   0.5, 0.99,  0.01) # another general para
+lowerbound_para_default <- c(  0,   0.8, 0.001, 0.001,  0.7, 0.001) # another general para
 #upperbound_para_default <- c(0.3,  0.8,  0.5,   0.3,   0.9, 0.001) # another general para
 #lowerbound_para_default <- c(0,    0.6,    0.001, 0.001, 0.7, 0.00001) # another general para
+#upperbound_para_default <- c(0.2, 0.8,  0.4, 0.04, 0.99,     0.1)
+#lowerbound_para_default <- c(0.1, 0.76, 0.2, 0.02, 0.95, 0.00001)
 
 panel.dt = na.omit(panel.dt)
 
 # choose which coins you want to estimate
-#coin.list.est = colnames(panel.dt)[-1]
-# coin.list.est = c("AXS","BAT","BDX","BSV","CAKE","CFX","COMP","CRV","DASH","DCR",
-#                   "DEXE","FET","GNO","HNT","INJ","IOTA","JST","LUNC","MANA","MX",
-#                   "NEO","NEXO","SAND","STX","TEL","THETA","TRAC","TWT","XTZ")
 # coin.list.est = c("AXS","BAT","BDX","CAKE","CRV","DASH","DCR",
 #                   "DEXE","FET","GNO","HNT","INJ","IOTA","JST","MANA",
 #                   "NEO","STX","TEL","TWT","XTZ")
+coin.list.est = c("AAVE","ADA","ALGO","AVAX","AXS","BAT","BCH","BDX","BNB","BTC","CAKE","CRO","CRV","DASH",
+  "DCR","DEXE","DOGE","DOT","ETC","ETH","FET","FIL","GNO","HBAR","HNT","INJ","IOTA","JST",
+  "KCS","LEO","LINK","LTC","MANA","NEAR","NEO","OKB","QNT","RNDR","SOL","STX","TEL","TRX",
+  "TWT","UNI","VET","XLM","XMR","XRP","XTZ","ZEC")
 
-curr.coin = "BTC" # for test
+curr.coin = "GT" # for test
 for (curr.coin in coin.list.est) {
 
   # start with defaults
