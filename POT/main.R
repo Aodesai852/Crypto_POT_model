@@ -67,9 +67,12 @@ panel.dt = na.omit(panel.dt)
 
 # choose which coins you want to estimate
 #coin.list.est = colnames(panel.dt)[-1]
-coin.list.est = c("AXS","BAT","BDX","BSV","CAKE","CFX","COMP","CRV","DASH","DCR",
-                  "DEXE","FET","GNO","HNT","INJ","IOTA","JST","LUNC","MANA","MX",
-                  "NEO","NEXO","SAND","STX","TEL","THETA","TRAC","TWT","XTZ")
+# coin.list.est = c("AXS","BAT","BDX","BSV","CAKE","CFX","COMP","CRV","DASH","DCR",
+#                   "DEXE","FET","GNO","HNT","INJ","IOTA","JST","LUNC","MANA","MX",
+#                   "NEO","NEXO","SAND","STX","TEL","THETA","TRAC","TWT","XTZ")
+# coin.list.est = c("AXS","BAT","BDX","CAKE","CRV","DASH","DCR",
+#                   "DEXE","FET","GNO","HNT","INJ","IOTA","JST","MANA",
+#                   "NEO","STX","TEL","TWT","XTZ")
 
 curr.coin = "BTC" # for test
 for (curr.coin in coin.list.est) {
