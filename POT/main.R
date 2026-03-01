@@ -67,18 +67,15 @@ lowerbound_para_default <- c(0,     0.4, 0.00001, 0.00001,   0.4, 0.00001) # gen
 
 panel.dt = na.omit(panel.dt)
 
-# choose which coins you want to estimate
-# coin.list.est = c("AXS","BAT","BDX","CAKE","CRV","DASH","DCR",
-#                   "DEXE","FET","GNO","HNT","INJ","IOTA","JST","MANA",
-#                   "NEO","STX","TEL","TWT","XTZ")
-# coin.list.est = c("AAVE","ADA","ALGO","AVAX","AXS","BAT","BCH","BDX","BNB","BTC","CAKE","CRO","CRV","DASH",
-#   "DCR","DEXE","DOGE","DOT","ETC","ETH","FET","FIL","GNO","HBAR","HNT","INJ","IOTA","JST",
-#   "KCS","LEO","LINK","LTC","MANA","NEAR","NEO","OKB","QNT","RNDR","SOL","STX","TEL","TRX",
-#   "TWT","UNI","VET","XLM","XMR","XRP","XTZ","ZEC")
+# choose which coins to estimate
+coin.list.est = c("AAVE","ADA","ALGO","AVAX","AXS","BAT","BCH","BNB","BTC","CAKE","CRO","CRV","DASH",
+  "DCR","DEXE","DOGE","DOT","ETC","ETH","FET","FIL","GNO","GT","HBAR","HNT","INJ","IOTA","JST",
+  "KCS","LEO","LINK","LTC","MANA","NEAR","NEO","OKB","QNT","RNDR","SOL","STX","TEL","TRX",
+  "TWT","UNI","VET","XLM","XMR","XRP","XTZ","ZEC")
 
 # temp
-coin.list.est = c()
-neg.only = TRUE # FALSE default
+#coin.list.est = c()
+neg.only = FALSE # FALSE default
 pos.only = FALSE # FALSE default
 
 for (curr.coin in coin.list.est) {
