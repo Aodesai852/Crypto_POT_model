@@ -56,10 +56,10 @@ init_lower_xi_sigma <- c(1, 0.001)
 
 # (phi_0 (constant term),phi_1(beta term),phi_2(alpha term),psi_0(constant term),psi_1(beta term),psi_2(alpha term))
 # phi_i is parameter for xi, psi_i is parameter for sigma
-#upperbound_para_default <- c(0.3, 0.999,     0.3,     0.3, 0.999,     0.3) # general para
-#lowerbound_para_default <- c(0,     0.4, 0.00001, 0.00001,   0.4, 0.00001) # general para
-upperbound_para_default <- c(0.1, 0.999,   0.5,   0.5, 0.99,  0.01) # another general para
-lowerbound_para_default <- c(  0,   0.8, 0.001, 0.001,  0.7, 0.001) # another general para
+upperbound_para_default <- c(0.3, 0.999,     0.3,     0.3, 0.999,     0.3) # general para
+lowerbound_para_default <- c(0,     0.4, 0.00001, 0.00001,   0.4, 0.00001) # general para
+#upperbound_para_default <- c(0.1, 0.999,   0.5,   0.5, 0.99,  0.01) # another general para
+#lowerbound_para_default <- c(  0,   0.8, 0.001, 0.001,  0.7, 0.001) # another general para
 #upperbound_para_default <- c(0.3,  0.8,  0.5,   0.3,   0.9, 0.001) # another general para
 #lowerbound_para_default <- c(0,    0.6,    0.001, 0.001, 0.7, 0.00001) # another general para
 #upperbound_para_default <- c(0.2, 0.8,  0.4, 0.04, 0.99,     0.1)
@@ -75,10 +75,12 @@ panel.dt = na.omit(panel.dt)
 #   "DCR","DEXE","DOGE","DOT","ETC","ETH","FET","FIL","GNO","HBAR","HNT","INJ","IOTA","JST",
 #   "KCS","LEO","LINK","LTC","MANA","NEAR","NEO","OKB","QNT","RNDR","SOL","STX","TEL","TRX",
 #   "TWT","UNI","VET","XLM","XMR","XRP","XTZ","ZEC")
-# temp
-coin.list.est = c("OKB")
 
-curr.coin = "XLM" # for test
+# temp
+coin.list.est = c()
+neg.only = TRUE # FALSE default
+pos.only = FALSE # FALSE default
+
 for (curr.coin in coin.list.est) {
 
   # start with defaults
@@ -135,8 +137,8 @@ for (curr.coin in coin.list.est) {
          plot = price_plot_handle,                     
          width = 8, height = 4)        # inches
   
+  if (!pos.only){
   try.result = try({
-    
   # estimating lower tail
   neg_optim_result <- optim_result(raw_obs_neg,obs_neg,num_of_para,init_lower_xi_sigma,init_upper_xi_sigma,
                            lowerbound_para_down,upperbound_para_down,burnin_est,ktype,Sigma_type,tau_global_neg,
@@ -156,15 +158,15 @@ for (curr.coin in coin.list.est) {
   ggsave(paste0(target_folder,"down_tail/P_std_sigma/",curr.coin,".pdf"),       
          plot = neg_POT_plot$P_std_sigma,                     
          width = 8, height = 4)        # inches
-  
   }, silent = TRUE) # end of try
   
   if (inherits(try.result, "try-error")) {
     message(paste("Error in lowertail", curr.coin, "— skipping to next"))
   }
+  }
   
+  if (!neg.only){
   try.result = try({
-    
   # estimating upper tail
   pos_optim_result <- optim_result(raw_obs_pos,obs_pos,num_of_para,init_lower_xi_sigma,init_upper_xi_sigma,
                                    lowerbound_para_up,upperbound_para_up,burnin_est,ktype,Sigma_type,tau_global_pos,
@@ -184,11 +186,11 @@ for (curr.coin in coin.list.est) {
   ggsave(paste0(target_folder,"up_tail/P_std_sigma/",curr.coin,".pdf"),       
          plot = pos_POT_plot$P_std_sigma,                     
          width = 8, height = 4)        # inches
-  
   }, silent = TRUE) # end of try
   
   if (inherits(try.result, "try-error")) {
     message(paste("Error in uppertail", curr.coin, "— skipping to next"))
+  }
   }
   
 }
