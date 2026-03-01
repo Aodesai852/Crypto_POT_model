@@ -152,7 +152,7 @@ optim_result <- function(raw_obs,obs,num_of_para,init_lower_xi_sigma,init_upper_
                     init = init_xi_sigma, burnin = burnin_est, ktype = ktype, Sigma_type = Sigma_type)
     stderr <- sqrt(diag(solve(hess))) # solve(hess) returns the inverse of hess 
     if (any(is.na(stderr))) {
-      print(paste0("pass ",m))
+      #print(paste0("pass ",m))
       next
     }
     # calc significance，Wald test

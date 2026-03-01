@@ -71,12 +71,14 @@ panel.dt = na.omit(panel.dt)
 # coin.list.est = c("AXS","BAT","BDX","CAKE","CRV","DASH","DCR",
 #                   "DEXE","FET","GNO","HNT","INJ","IOTA","JST","MANA",
 #                   "NEO","STX","TEL","TWT","XTZ")
-coin.list.est = c("AAVE","ADA","ALGO","AVAX","AXS","BAT","BCH","BDX","BNB","BTC","CAKE","CRO","CRV","DASH",
-  "DCR","DEXE","DOGE","DOT","ETC","ETH","FET","FIL","GNO","HBAR","HNT","INJ","IOTA","JST",
-  "KCS","LEO","LINK","LTC","MANA","NEAR","NEO","OKB","QNT","RNDR","SOL","STX","TEL","TRX",
-  "TWT","UNI","VET","XLM","XMR","XRP","XTZ","ZEC")
+# coin.list.est = c("AAVE","ADA","ALGO","AVAX","AXS","BAT","BCH","BDX","BNB","BTC","CAKE","CRO","CRV","DASH",
+#   "DCR","DEXE","DOGE","DOT","ETC","ETH","FET","FIL","GNO","HBAR","HNT","INJ","IOTA","JST",
+#   "KCS","LEO","LINK","LTC","MANA","NEAR","NEO","OKB","QNT","RNDR","SOL","STX","TEL","TRX",
+#   "TWT","UNI","VET","XLM","XMR","XRP","XTZ","ZEC")
+# temp
+coin.list.est = c("OKB")
 
-curr.coin = "GT" # for test
+curr.coin = "XLM" # for test
 for (curr.coin in coin.list.est) {
 
   # start with defaults
@@ -190,6 +192,5 @@ for (curr.coin in coin.list.est) {
   }
   
 }
-
 
 stopCluster(cl)
