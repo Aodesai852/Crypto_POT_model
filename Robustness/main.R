@@ -1,40 +1,41 @@
 rm(list=ls())
-setwd("D:/MyFiles/EVT/TaoChunmei_FX/code")
+
+setwd("D:/MyFiles/EVT/Crypto_POT")
 library("igraph")
 library("data.table")
 library("ggplot2")
-source("func_robustness_plot.R")
+source("./code/Robustness/func_robustness_plot.R")
 
 dca <- new.env()
-load("./result/DY/dca.RData", env = dca)
+load("./result/DY/percent95win200/dca.RData", env = dca)
 dca$net_down = dca$dca_down$TABLE["NET",]
 dca$net_down = dca$net_down[-length(dca$net_down)]
 dca$net_up = dca$dca_up$TABLE["NET",]
 dca$net_up = dca$net_up[-length(dca$net_up)]
 
 dca_rob90 <- new.env()
-load("./result/DY/rob_test/0.90/dca.RData", env = dca_rob90)
+load("./result/DY/percent90win200/dca.RData", env = dca_rob90)
 dca_rob90$net_down = dca_rob90$dca_down$TABLE["NET",]
 dca_rob90$net_down = dca_rob90$net_down[-length(dca_rob90$net_down)]
 dca_rob90$net_up = dca_rob90$dca_up$TABLE["NET",]
 dca_rob90$net_up = dca_rob90$net_up[-length(dca_rob90$net_up)]
 
 dca_rob85 <- new.env()
-load("./result/DY/rob_test/0.85/dca.RData", env = dca_rob85)
+load("./result/DY/percent85win200/dca.RData", env = dca_rob85)
 dca_rob85$net_down = dca_rob85$dca_down$TABLE["NET",]
 dca_rob85$net_down = dca_rob85$net_down[-length(dca_rob85$net_down)]
 dca_rob85$net_up = dca_rob85$dca_up$TABLE["NET",]
 dca_rob85$net_up = dca_rob85$net_up[-length(dca_rob85$net_up)]
 
 dca_win150 <- new.env()
-load("./result/DY/win_size_rob/150/dca.RData", env = dca_win150)
+load("./result/DY/percent95win150/dca.RData", env = dca_win150)
 dca_win150$net_down = dca_win150$dca_down$TABLE["NET",]
 dca_win150$net_down = dca_win150$net_down[-length(dca_win150$net_down)]
 dca_win150$net_up = dca_win150$dca_up$TABLE["NET",]
 dca_win150$net_up = dca_win150$net_up[-length(dca_win150$net_up)]
 
 dca_win250 <- new.env()
-load("./result/DY/win_size_rob/250/dca.RData", env = dca_win250)
+load("./result/DY/percent95win250/dca.RData", env = dca_win250)
 dca_win250$net_down = dca_win250$dca_down$TABLE["NET",]
 dca_win250$net_down = dca_win250$net_down[-length(dca_win250$net_down)]
 dca_win250$net_up = dca_win250$dca_up$TABLE["NET",]
@@ -171,42 +172,42 @@ plotdown_win250 <- plotdown_win250 + labs(
 )
 
 # save the plots
-ggsave("./result/TCI_plot/rob_down.pdf",       
+ggsave("./result/Robustness/TCI_plot/rob_down.pdf",       
        plot = TCI_plot_down_rob,                     
        width = 10, height = 3)        # inches
-ggsave("./result/TCI_plot/rob_up.pdf",       
+ggsave("./result/Robustness/TCI_plot/rob_up.pdf",       
        plot = TCI_plot_up_rob,                     
        width = 10, height = 3)        # inches
-ggsave("./result/TCI_plot/win_down.pdf",       
+ggsave("./result/Robustness/TCI_plot/win_down.pdf",       
        plot = TCI_plot_down_win,                     
        width = 10, height = 3)        # inches
-ggsave("./result/TCI_plot/win_up.pdf",       
+ggsave("./result/Robustness/TCI_plot/win_up.pdf",       
        plot = TCI_plot_up_win,                     
        width = 10, height = 3)        # inches
 
-ggsave("./result/rank45plot/rob90down.pdf",
+ggsave("./result/Robustness/rank45plot/rob90down.pdf",
        plot = plotdown_rob90,
        width = 8, height = 4)
-ggsave("./result/rank45plot/rob85down.pdf",
+ggsave("./result/Robustness/rank45plot/rob85down.pdf",
        plot = plotdown_rob85,
        width = 8, height = 4)
-ggsave("./result/rank45plot/win150down.pdf",
+ggsave("./result/Robustness/rank45plot/win150down.pdf",
        plot = plotdown_win150,
        width = 8, height = 4)
-ggsave("./result/rank45plot/win250down.pdf",
+ggsave("./result/Robustness/rank45plot/win250down.pdf",
        plot = plotdown_win250,
        width = 8, height = 4)
 
-ggsave("./result/rank45plot/rob90up.pdf",
+ggsave("./result/Robustness/rank45plot/rob90up.pdf",
        plot = plotup_rob90,
        width = 8, height = 4)
-ggsave("./result/rank45plot/rob85up.pdf",
+ggsave("./result/Robustness/rank45plot/rob85up.pdf",
        plot = plotup_rob85,
        width = 8, height = 4)
-ggsave("./result/rank45plot/win150up.pdf",
+ggsave("./result/Robustness/rank45plot/win150up.pdf",
        plot = plotup_win150,
        width = 8, height = 4)
-ggsave("./result/rank45plot/win250up.pdf",
+ggsave("./result/Robustness/rank45plot/win250up.pdf",
        plot = plotup_win250,
        width = 8, height = 4)
 
