@@ -587,22 +587,21 @@ PlotNPT = function(dca, ca=NULL, path=NULL, ...) {
 #' @import igraph
 PlotNetwork = function(dca, method="NPDC", path=NULL, name_length=NULL,
                        threshold=0.25, threshold_color=0.50, ...) {
-  if (!is.null(path)) {
-    if (!dir.exists(path)) {
-      dir.create(path)
-    }
-  }
+
+  # ---- select connectedness measure ----
   if (method=="NPDC") {
     x = dca$NPDC
   } else if (method=="PCI") {
     x = dca$PCI
   } else {
-    stop("This method does not exists")
+    stop("This method does not exist")
   }
+  
   date = as.Date(dimnames(x)[[3]])
   t = length(date)
   k = ncol(x)
   
+  # ---- variable names ----
   NAMES = dimnames(x)[[1]]
   if (is.null(NAMES)) {
     NAMES = 1:k
@@ -615,7 +614,9 @@ PlotNetwork = function(dca, method="NPDC", path=NULL, name_length=NULL,
   
   oldpar = par(no.readonly=TRUE)
   on.exit(par(oldpar))
-  if (length(dim(x))>3) {
+  
+  # ---- dimension handling ----
+  if (length(dim(x)) > 3) {
     kk = dim(x)[4]
     k1 = ceiling(sqrt(kk))
     k2 = ceiling(kk/k1)
@@ -625,67 +626,91 @@ PlotNetwork = function(dca, method="NPDC", path=NULL, name_length=NULL,
   }
   
   par(mfrow = c(k1,k2), oma = c(0,0,0,0), mar = c(0,0,0,0), mgp = c(0, 0, 0))
-  if (!is.null(path)) pdf(file=paste0(path, "/NetworkPlot.pdf"), width=10, height=10)
+  
+  # ---- open PDF device ----
+  if (!is.null(path)) {
+    pdf(file = path, width = 10, height = 10)
+  }
+  
   for (ijk in 1:kk) {
+    
     x_ = t(apply(x[,,,ijk], 1:2, mean))
-    x_ = ifelse(x_<0, 0, x_)
+    x_ = ifelse(x_ < 0, 0, x_)
+    
     colnames(x_) = rownames(x_) = NAMES
     diag(x_) = 0
-    x_ = x_ - min(x_)
-    x_ = x_ / max(x_)
-    x_[x_<threshold] = 0
-    m = 5 * x_
     
-    if (isTRUE(all.equal(x_, t(x_)))) {
-      gr = graph.adjacency(m, mode="undirected", weighted=TRUE)
-      lo = layout_in_circle(gr)
-      net = graph.adjacency(m, mode="undirected", weighted=TRUE, diag=FALSE)
-      
-      # Node colors: dark -> light blue (for undirected case, use light blue)
-      color = rep("#A6CEE3", k)   # light blue
-      nn = 1
-    } else {
-      gr = graph.adjacency(m, mode="undirected", weighted=TRUE)
-      net = graph.adjacency(m, mode="directed", weighted=TRUE, diag=FALSE)
-      lo <- layout_in_circle(gr)
-      
-      # Node colors: dark -> light blue, light -> light orange
-      color = rep("#A6CEE3", k)   # light blue replaces dark
-      nn = apply(apply(x[,,,ijk],1:2,mean),1,sum)
-      color[nn>0] = "#FDBF6F"     # light orange replaces light
-      nn = abs(nn/max(abs(nn)))
+    # ---- normalize safely ----
+    x_ = x_ - min(x_, na.rm=TRUE)
+    max_val <- max(x_, na.rm=TRUE)
+    if (max_val > 0) {
+      x_ = x_ / max_val
     }
     
-    # Edge colors: above threshold_color -> red, otherwise grey
-    edge_col = ifelse(E(net)$weight >= 5 * threshold_color, "red", "grey50")
+    x_[x_ < threshold] = 0
+    m = 5 * x_
     
-    # Make arrowheads more visible (no logic change, only styling)
-    edge_arrow_size  = 0.6   # was 0.4
-    edge_arrow_width = 1.2   # thicker arrowhead
+    # ---- network construction ----
+    if (isTRUE(all.equal(x_, t(x_)))) {
+      
+      gr = igraph::graph.adjacency(m, mode="undirected", weighted=TRUE)
+      lo = igraph::layout_in_circle(gr)
+      net = igraph::graph.adjacency(m, mode="undirected", weighted=TRUE, diag=FALSE)
+      
+      color = rep("#A6CEE3", k)
+      nn = rep(1, k)
+      
+    } else {
+      
+      gr = igraph::graph.adjacency(m, mode="undirected", weighted=TRUE)
+      net = igraph::graph.adjacency(m, mode="directed", weighted=TRUE, diag=FALSE)
+      lo <- igraph::layout_in_circle(gr)
+      
+      color = rep("#A6CEE3", k)
+      
+      nn = apply(apply(x[,,,ijk],1:2,mean),1,sum)
+      
+      color[nn > 0] = "#FDBF6F"
+      
+      max_nn <- max(abs(nn))
+      if (max_nn > 0) {
+        nn = abs(nn / max_nn)
+      } else {
+        nn = rep(0, length(nn))
+      }
+    }
     
-    edge_width = E(net)$weight * 0.7
+    # ---- edge styles ----
+    edge_col = ifelse(igraph::E(net)$weight >= 5 * threshold_color, "red", "grey50")
     
-    plot.igraph(
+    edge_arrow_size  = 0.6
+    edge_arrow_width = 1.2
+    edge_width = igraph::E(net)$weight * 0.7
+    
+    igraph::plot.igraph(
       net,
-      vertex.label=V(net)$name,
-      layout=lo,
-      vertex.label.family="sans",
-      vertex.label.cex=0.8,
-      vertex.size=5+nn*10,
-      vertex.label.font=2,
-      vertex.color=color,
-      vertex.frame.color=color,
-      vertex.label.color="black",
-      mark.col="steelblue4",
-      edge.width=edge_width,
-      edge.color=edge_col,
-      edge.arrow.size=edge_arrow_size,
-      edge.arrow.width=edge_arrow_width,
-      edge.curved=0.25,
-      edge.lty=1
+      vertex.label = igraph::V(net)$name,
+      layout = lo,
+      vertex.label.family = "sans",
+      vertex.label.cex = 0.8,
+      vertex.size = 5 + nn * 10,
+      vertex.label.font = 2,
+      vertex.color = color,
+      vertex.frame.color = color,
+      vertex.label.color = "black",
+      mark.col = "steelblue4",
+      edge.width = edge_width,
+      edge.color = edge_col,
+      edge.arrow.size = edge_arrow_size,
+      edge.arrow.width = edge_arrow_width,
+      edge.curved = 0.25,
+      edge.lty = 1
     )
   }
-  if (!is.null(path)) dev.off()
+  
+  if (!is.null(path)) {
+    dev.off()
+  }
 }
 
 
@@ -807,77 +832,135 @@ PlotPCI = function(dca, ca=NULL, path=NULL, ylim=c(NULL, NULL), selection=NULL, 
 #' @import graphics
 #' @import grDevices
 #' @export
-PlotTCI = function(dca, ca=NULL, path=NULL, ylim=c(NULL, NULL), ...) {
-  if (!is.null(path)) {
-    if (!dir.exists(path)) {
-      dir.create(path)
-    }
-  }
-  if (length(ca)>0 && !is.null(ca$config$approach)) {
-    ca = list(ca)
-  }
-  x = dca$TCI
-  date = as.Date(rownames(x))
-  t = length(date)
-  k = ncol(x)
-  lower = ylim[1]
-  upper = ylim[2]
+PlotTCI <- function(dca, ca=NULL, path=NULL, ylim=c(NULL, NULL), fill=FALSE, ...) {
   
-  oldpar = par(no.readonly=TRUE)
-  on.exit(par(oldpar)) 
-  if (!is.null(path)) pdf(file=paste0(path, "/TCI.pdf"), width=10, height=5)
-  par(mfrow=c(1,1), oma=c(0,0,0,0) + 0.5, mar = c(1,1,1,1) + .5, mgp=c(1, 0.4, 0))
-  if (length(dim(dca$NET))>2) {
-    x_ = x
-    if (is.null(lower)) {
-      lower = min(x_)
-    }
-    if (is.null(upper)) {
-      upper = max(apply(x_,1,sum))
-    }
-    plot(date, x_[,1], type="l", main="", las=1, xlab="", ylab="", xaxs="i", yaxs="i", tck=-0.02, ylim=c(lower,upper))#, ...)
+  # normalize ca into a list if a single connectedness object is provided
+  if (length(ca) > 0 && !is.null(ca$config$approach)) {
+    ca <- list(ca)
+  }
+  
+  x <- dca$TCI
+  date <- as.Date(rownames(x))
+  t <- length(date)
+  
+  # handle x shape robustly
+  x_mat <- as.matrix(x)
+  k <- ncol(x_mat)
+  
+  lower <- ylim[1]
+  upper <- ylim[2]
+  
+  oldpar <- par(no.readonly = TRUE)
+  on.exit(par(oldpar), add = TRUE)
+  
+  # open PDF device
+  if (!is.null(path)) {
+    pdf(file = path, width = 10, height = 5)
+    on.exit(dev.off(), add = TRUE)
+  }
+  
+  par(mfrow=c(1,1), oma=c(0,0,0,0) + 0.5, mar=c(1,1,1,1) + .5, mgp=c(1, 0.4, 0))
+  
+  # case 1: rolling / multi-layer (NET has >2 dims)
+  if (length(dim(dca$NET)) > 2) {
+    
+    x_ <- x_mat
+    
+    if (is.null(lower)) lower <- min(x_, na.rm = TRUE)
+    if (is.null(upper)) upper <- max(x_, na.rm = TRUE)
+    
+    plot(date, x_[,1], type="l", main="", las=1,
+         xlab="", ylab="", xaxs="i", yaxs="i", tck=-0.02,
+         ylim=c(lower, upper))
+    
     grid(NA, NULL, lty=2)
-    polygon(c(date,rev(date)),c(c(rep(0,t)),rev(x_[,1])),col=1, border=1)
-    for (j in 1:dim(x_)[2]) {
-      polygon(c(date,rev(date)),c(c(rep(0,t)),rev(x_[,j])),col=j, border=j)
+    
+    # optional fill (off by default)
+    if (isTRUE(fill)) {
+      for (j in 1:ncol(x_)) {
+        polygon(c(date, rev(date)), c(rep(0, t), rev(x_[,j])),
+                col=j, border=j)
+      }
     }
-    legend("topleft", colnames(x_), fill=1:dim(x_)[2], bty="n")
+    
+    # draw lines
     for (j in 1:ncol(x_)) {
-      lines(date, x_[,j],col=j)
+      lines(date, x_[,j], col=j)
     }
+    
+    legend("topleft", colnames(x_), col=1:ncol(x_), lty=1, bty="n")
+    
     abline(h=0, lty=3)
     box()
+    
   } else {
-    if (is.null(lower)) {
-      lower = 0
-    }
-    if (is.null(upper)) {
-      upper = 100
-    }
-    plot(date, as.numeric(x), type="l", main="", las=1, xlab="", ylab="", xaxs="i", yaxs="i", tck=-0.02, ylim=c(lower,upper), ...)
+    # case 2: standard single TCI series
+    
+    if (is.null(lower)) lower <- 0
+    if (is.null(upper)) upper <- 100
+    
+    y <- as.numeric(x_mat)
+    
+    plot(date, y, type="l", main="", las=1,
+         xlab="", ylab="", xaxs="i", yaxs="i", tck=-0.02,
+         ylim=c(lower, upper), ...)
+    
     grid(NA, NULL, lty=2)
-    polygon(c(date,rev(date)),c(c(rep(0,t)),rev(x)),col=1, border=1)
+    
+    # optional fill (off by default)
+    if (isTRUE(fill)) {
+      polygon(c(date, rev(date)), c(rep(0, t), rev(y)),
+              col=1, border=1)
+    }
+    
+    # optional comparisons
     if (!is.null(ca)) {
       for (il in 1:length(ca)) {
-        lines(as.Date(rownames(ca[[il]]$TCI)), ca[[il]]$TCI, col=il+1)
-        gTCI = ca[[il]]$gTCI
+        
+        ca_tci <- ca[[il]]$TCI
+        ca_date <- as.Date(rownames(ca_tci))
+        
+        lines(ca_date, as.numeric(ca_tci), col=il+1)
+        
+        gTCI <- ca[[il]]$gTCI
         if (!is.null(gTCI)) {
-          for (ij in 1:ncol(gTCI)) {
-            lines(as.Date(rownames(ca[[il]]$TCI)), gTCI[,ij], col=ij+2)
+          gTCI_mat <- as.matrix(gTCI)
+          for (ij in 1:ncol(gTCI_mat)) {
+            lines(ca_date, gTCI_mat[, ij], col=ij+2)
           }
         }
       }
-      if (length(ca)==1) {
-        if (ca[[1]]$config$approach=="Internal" || ca[[1]]$config$approach=="External") {
-          legend("topleft", c("TCI", paste("TCI",ca[[1]]$config$approach), colnames(gTCI)), fill=1:(ncol(gTCI)+2), bty="n")
-        } else if (ca[[1]]$config$approach=="Inclusive" || ca[[1]]$config$approach=="Exclusive") {
-          legend("topleft", c("TCI", paste("TCI", ca[[1]]$config$approach)), fill=1:2, bty="n")
+      
+      # legend behavior kept similar to original (only for single ca)
+      if (length(ca) == 1) {
+        approach <- ca[[1]]$config$approach
+        
+        gTCI <- ca[[1]]$gTCI
+        gTCI_mat <- if (!is.null(gTCI)) as.matrix(gTCI) else NULL
+        
+        if (!is.null(approach) && (approach == "Internal" || approach == "External")) {
+          if (!is.null(gTCI_mat)) {
+            legend("topleft",
+                   c("TCI", paste("TCI", approach), colnames(gTCI_mat)),
+                   col = 1:(ncol(gTCI_mat) + 2),
+                   lty = 1, bty="n")
+          } else {
+            legend("topleft",
+                   c("TCI", paste("TCI", approach)),
+                   col = 1:2, lty=1, bty="n")
+          }
+        } else if (!is.null(approach) && (approach == "Inclusive" || approach == "Exclusive")) {
+          legend("topleft",
+                 c("TCI", paste("TCI", approach)),
+                 col = 1:2, lty=1, bty="n")
         }
       }
     }
+    
     box()
   }
-  if (!is.null(path)) dev.off()
+  
+  invisible(TRUE)
 }
 
 #' @title Dynamic to total directional connectedness plot

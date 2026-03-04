@@ -1,80 +1,25 @@
 rm(list=ls())
-setwd("D:/MyFiles/EVT/BTC_POT/code")
+
+setwd("D:/MyFiles/EVT/Crypto_POT")
 library("igraph")
 library("zoo")
 library("data.table")
-source("./Risk_spillovers_plot.R")
-threshold = 0.20
-threshold_color = 0.50
-rob.mode = FALSE
+source("./code/DY/Risk_spillovers_plot.R")
 
-if (rob.mode) {
-dca_rob85 <- new.env()
-load("./result/DY/rob_test/0.85/dca.RData", envir = dca_rob85)
-dca_rob85$reci.downtail.index <- data.table(
-  time = index(dca_rob85$zoo.down.combined),
-  as.data.frame(coredata(dca_rob85$zoo.down.combined))
-)
-dca_rob85$reci.uptail.index <- data.table(
-  time = index(dca_rob85$zoo.up.combined),
-  as.data.frame(coredata(dca_rob85$zoo.up.combined))
-)
+############## changable #################
+threshold = 0.50
+threshold_color = 0.75
+load_addr = "./result/DY/percent95win250/dca.RData"
+target_folder = "./result/DY/percent95win250/"
+##########################################
 
-
-dca_rob90 <- new.env()
-load("./result/DY/rob_test/0.90/dca.RData", envir = dca_rob90)
-dca_rob90$reci.downtail.index <- data.table(
-  time = index(dca_rob90$zoo.down.combined),
-  as.data.frame(coredata(dca_rob90$zoo.down.combined))
-)
-dca_rob90$reci.uptail.index <- data.table(
-  time = index(dca_rob90$zoo.up.combined),
-  as.data.frame(coredata(dca_rob90$zoo.up.combined))
-)
-
-dca_win250 <- new.env()
-load("./result/DY/win_size_rob/250/dca.RData", envir = dca_win250)
-
-dca_win150 <- new.env()
-load("./result/DY/win_size_rob/150/dca.RData", envir = dca_win150)
-}
-
-dca <- new.env()
-load("./result/DY/dca.RData", envir = dca)
-dca$reci.downtail.index <- data.table(
-  time = index(dca$zoo.down.combined),
-  as.data.frame(coredata(dca$zoo.down.combined))
-)
-dca$reci.uptail.index <- data.table(
-  time = index(dca$zoo.up.combined),
-  as.data.frame(coredata(dca$zoo.up.combined))
-)
+load(load_addr)
 
 suppressWarnings({
-PlotNetwork(dca$dca_down, path = "./result/down_tail/", threshold=threshold, threshold_color = threshold_color)
-PlotNetwork(dca$dca_up, path = "./result/up_tail/", threshold=threshold, threshold_color = threshold_color)
-PlotNET(dca$dca_down, path = "./result/down_tail/NET_plots", separate = TRUE)
-PlotNET(dca$dca_up, path = "./result/up_tail/NET_plots", separate = TRUE)
-
-if (rob.mode) {
-PlotNetwork(dca_rob85$dca_down, path = "./result/rob_plot/0.85/down_tail/", threshold=threshold, threshold_color = threshold_color)
-PlotNetwork(dca_rob85$dca_up, path = "./result/rob_plot/0.85/up_tail/", threshold=threshold, threshold_color = threshold_color)
-PlotNET(dca_rob85$dca_down, path = "./result/rob_plot/0.85/down_tail/NET_plots", separate = TRUE)
-PlotNET(dca_rob85$dca_up, path = "./result/rob_plot/0.85/up_tail/NET_plots", separate = TRUE)
-
-PlotNetwork(dca_rob90$dca_down, path = "./result/rob_plot/0.90/down_tail/", threshold=threshold, threshold_color = threshold_color)
-PlotNetwork(dca_rob90$dca_up, path = "./result/rob_plot/0.90/up_tail/", threshold=threshold, threshold_color = threshold_color)
-PlotNET(dca_rob90$dca_down, path = "./result/rob_plot/0.90/down_tail/NET_plots", separate = TRUE)
-PlotNET(dca_rob90$dca_up, path = "./result/rob_plot/0.90/up_tail/NET_plots", separate = TRUE)
-
-PlotNetwork(dca_win150$dca_down, path = "./result/win_plot/150/down_tail/", threshold=threshold, threshold_color = threshold_color)
-PlotNetwork(dca_win150$dca_up, path = "./result/win_plot/150/up_tail/", threshold=threshold, threshold_color = threshold_color)
-PlotNET(dca_win150$dca_down, path = "./result/win_plot/150/down_tail/NET_plots", separate = TRUE)
-PlotNET(dca_win150$dca_up, path = "./result/win_plot/150/up_tail/NET_plots", separate = TRUE)
-
-PlotNetwork(dca_win250$dca_down, path = "./result/win_plot/250/down_tail/", threshold=threshold, threshold_color = threshold_color)
-PlotNetwork(dca_win250$dca_up, path = "./result/win_plot/250/up_tail/", threshold=threshold, threshold_color = threshold_color)
-PlotNET(dca_win250$dca_down, path = "./result/win_plot/250/down_tail/NET_plots", separate = TRUE)
-PlotNET(dca_win250$dca_up, path = "./result/win_plot/250/up_tail/NET_plots", separate = TRUE)
-}
+PlotNetwork(dca_down, path = paste0(target_folder,"network_plot_down.pdf"), threshold=threshold, threshold_color = threshold_color)
+PlotNetwork(dca_up, path = paste0(target_folder,"network_plot_up.pdf"), threshold=threshold, threshold_color = threshold_color)
+PlotNET(dca_down, path = paste0(target_folder,"NET_plot_down"), separate = TRUE)
+PlotNET(dca_up, path = paste0(target_folder,"NET_plot_up"), separate = TRUE)
+PlotTCI(dca_down, path = paste0(target_folder,"TCI_plot_down.pdf"), ylim=c(60,100))
+PlotTCI(dca_up, path = paste0(target_folder,"TCI_plot_up.pdf"), ylim=c(60,100))
 })

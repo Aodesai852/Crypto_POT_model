@@ -1,44 +1,37 @@
 rm(list=ls())
+
 library(data.table)
 library(stats)
 library(zoo)
 library(rugarch)
 library(rmgarch)
 library(progress)
-setwd("D:/MyFiles/EVT/BTC_POT/code")
-source("./Risk_spillovers.R")
-core.mode = FALSE # only estimate core currencies
-rob.mode = FALSE # robustness test, if = FALSE, q = 0.95
-rob.q = 0.85 # 0.90 or 0.85
-win.size.rob = FALSE # alter the window size to see whether it's robust
-# if win.size.rob = FALSE, window.size must be 200
-window.size = 200 # 150, 200 or 250
 
-if (rob.mode){
-  addr_down = paste0("./result/rob_test/",sprintf("%.2f",rob.q),"/down_tail/optim_result/")
-  addr_up = paste0("./result/rob_test/",sprintf("%.2f",rob.q),"/up_tail/optim_result/")
-} else {
-  addr_down = "./result/down_tail/optim_result/"
-  addr_up = "./result/up_tail/optim_result/"
-}
+setwd("D:/MyFiles/EVT/Crypto_POT")
+source("./code/DY/Risk_spillovers.R")
 
-coin.names = c(
-"AAVE","ALGO","AVAX","BNB","BCH","BTC","ADA","LINK","CRO","DOGE","ETC","ETH","FIL","HBAR",
-"KCS","XMR","NEAR","OKB","DOT","QNT","RNDR","SOL","XLM","TRX","UNI","LEO","VET","ZEC"
-)
-
-core.coin.names = c(
-  "BTC","ETH"
-)
-
-zoo.up.combined.list = list()
-zoo.down.combined.list = list()
+######## changable ########################
+core.mode = FALSE
+model = "VAR"
+window.size = 200 # 150/200/250
+addr_down = "./result/POT/percent95/down_tail/optim_result/"
+addr_up = "./result/POT/percent95/up_tail/optim_result/"
+target_folder = "D:/MyFiles/EVT/Crypto_POT/result/DY/percent95win200/"
+coin.names = c("AAVE","ADA","ALGO","AVAX","AXS","BAT","BCH","BNB","BTC","CAKE","CRO","CRV","DASH",
+               "DCR","DEXE","DOGE","DOT","ETC","ETH","FET","FIL","GNO","GT","HBAR","HNT","INJ","IOTA","JST",
+               "KCS","LEO","LINK","LTC","MANA","NEAR","NEO","OKB","QNT","RNDR","SOL","STX","TEL","TRX",
+               "TWT","UNI","VET","XLM","XMR","XRP","XTZ","ZEC")
+core.coin.names = c("BCH","BNB","BTC","DOGE","ETC","ETH","SOL","TRX","XRP","ZEC")
+###########################################
 
 if (core.mode){
   names = core.coin.names
 }else{
   names = coin.names
 }
+
+zoo.up.combined.list = list()
+zoo.down.combined.list = list()
 
 for (curr.coin in names){
   load(paste0(addr_down,curr.coin,".RData"))
@@ -55,11 +48,12 @@ for (curr.coin in names){
 
 zoo.up.combined <- na.omit(do.call(merge, c(zoo.up.combined.list, all = TRUE)))
 zoo.down.combined <- na.omit(do.call(merge, c(zoo.down.combined.list, all = TRUE)))
+# zoo.down.combined and zoo.up.combined are the reciprocals of the tail index of all currencies
 
 dca_up = ConnectednessApproach(zoo.up.combined,
                             nlag=1,
                             nfore=20,
-                            model="VAR",
+                            model=model,
                             corrected=FALSE,
                             window.size=window.size,
                             connectedness="Time",
@@ -76,7 +70,7 @@ dca_up = ConnectednessApproach(zoo.up.combined,
 dca_down = ConnectednessApproach(zoo.down.combined,
                                nlag=1,
                                nfore=20,
-                               model="VAR",
+                               model=model,
                                corrected=FALSE,
                                window.size=window.size,
                                connectedness="Time",
@@ -91,28 +85,11 @@ dca_down = ConnectednessApproach(zoo.down.combined,
                                ))
 
 # save the results
-if (rob.mode){
-  if (core.mode){
-    save(zoo.up.combined,zoo.down.combined,dca_up,dca_down, file = paste0("./result/DY/rob_test/",sprintf("%.2f", rob.q),"/dca_core.RData"))
-  }else{
-    save(zoo.up.combined,zoo.down.combined,dca_up,dca_down, file = paste0("./result/DY/rob_test/",sprintf("%.2f", rob.q),"/dca.RData"))
-  }
-} else {
-  if (win.size.rob){
-    if (core.mode){
-      save(zoo.up.combined,zoo.down.combined,dca_up,dca_down, file = paste0("./result/DY/win_size_rob/",sprintf("%d",window.size),"/dca_core.RData"))
-    }else{
-      save(zoo.up.combined,zoo.down.combined,dca_up,dca_down, file = paste0("./result/DY/win_size_rob/",sprintf("%d",window.size),"/dca.RData"))
-    }
-  } else {
-    if (core.mode){
-      save(zoo.up.combined,zoo.down.combined,dca_up,dca_down, file = "./result/DY/dca_core.RData")
-    }else{
-      save(zoo.up.combined,zoo.down.combined,dca_up,dca_down, file = "./result/DY/dca.RData")
-    }
-  }
+
+if (core.mode){
+  save(dca_up,dca_down, file = paste0(target_folder,"dca_core.RData"))
+}else{
+  save(dca_up,dca_down, file = paste0(target_folder,"dca.RData"))
 }
 
-# zoo.down.combined and zoo.up.combined are the reciprocals of the tail index of all currencies
-# dca_up and dca_down are the static and dynamic DY results 
 
