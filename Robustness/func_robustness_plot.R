@@ -54,21 +54,18 @@ matrices_to_dt_by_time <- function(lst) {
 
 rank45_plot <- function(dt) {
   stopifnot(data.table::is.data.table(dt))
-  if (ncol(dt) < 3) {
-    stop("Input must have at least three columns: name, benchmark, alternative.")
-  }
+  if (ncol(dt) < 3) stop("Input must have at least three columns: name, benchmark, alternative.")
   
   name_col <- names(dt)[1]
-  y_col    <- names(dt)[2]  # benchmark (y-axis)
-  x_col    <- names(dt)[3]  # alternative (x-axis)
+  y_col    <- names(dt)[2]
+  x_col    <- names(dt)[3]
   
   d <- data.table::copy(dt)
   d[[name_col]] <- as.factor(d[[name_col]])
   
-  # Range for 45-degree line and equal axes
   rng <- range(c(d[[x_col]], d[[y_col]]), na.rm = TRUE)
   
-  p <- ggplot2::ggplot(
+  ggplot2::ggplot(
     d,
     ggplot2::aes(
       x = .data[[x_col]],
@@ -77,27 +74,18 @@ rank45_plot <- function(dt) {
     )
   ) +
     ggplot2::geom_abline(intercept = 0, slope = 1, linetype = "solid") +
-    ggplot2::geom_point(
-      size = 3,
-      shape = 16,     # fixed shape
-      alpha = 0.9
-    ) +
-    ggplot2::coord_equal(
-      xlim = rng,
-      ylim = rng,
-      expand = TRUE
-    ) +
-    ggplot2::labs(
-      x = x_col,
-      y = y_col,
-      color = "Asset"
-    ) +
+    ggplot2::geom_point(size = 3, shape = 16, alpha = 0.9) +
+    ggplot2::coord_equal(xlim = rng, ylim = rng, expand = TRUE) +
+    ggplot2::labs(x = x_col, y = y_col, color = "Asset") +
+    ggplot2::guides(color = ggplot2::guide_legend(ncol = 3, byrow = TRUE)) +
     ggplot2::theme_minimal() +
     ggplot2::theme(
-      legend.position = "right"
+      legend.position = "right",
+      legend.text = ggplot2::element_text(size = 9),
+      legend.key.height = grid::unit(0.6, "lines"),
+      legend.spacing.y = grid::unit(0.15, "lines"),
+      plot.margin = ggplot2::margin(10, 10, 10, 10)
     )
-  
-  return(p)
 }
 
 plot_multi_series <- function(dt) {

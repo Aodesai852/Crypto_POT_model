@@ -1,10 +1,21 @@
 rm(list=ls())
-setwd("D:/MyFiles/EVT/BTC_POT/code")
 
+setwd("D:/MyFiles/EVT/Crypto_POT")
+
+############# changable #################
+ret_desc_stat_path = "./result/POT/percent95/ret_desc_stats"
+ret_desc_stat_sink = "./table_txt/desc_table.txt"
+path_up_optim_result <- "./result/POT/percent95/up_tail/optim_result"
+path_down_optim_result <- "./result/POT/percent95/down_tail/optim_result"
+up_optim_result_sink = "./table_txt/up_optim_result_table.txt"
+down_optim_result_sink = "./table_txt/down_optim_result_table.txt"
+dca_path = "./result/DY/percent95win200/dca.RData"
+spillover_down_sink = "./table_txt/spillover_down_table.txt"
+spillover_up_sink = "./table_txt/spillover_up_table.txt"
 
 # ---- return descriptive statistics ----
 
-path_desc <- "./result/ret_desc_stats"
+path_desc <- ret_desc_stat_path
 files <- list.files(path_desc,
                     pattern = "\\.RData$",
                     full.names = TRUE)
@@ -74,7 +85,7 @@ tab_print[num_cols] <- lapply(tab_print[num_cols],
 
 # make Latex table
 desc_make_latex_table <- function(df,
-                             caption = "Descriptive statistics of cryptocurrency returns",
+                             caption = "Descriptive Statistics of Cryptocurrency Returns",
                              label   = "tab:coin_descriptive") {
   
   # Convert everything to character first
@@ -119,15 +130,12 @@ Coin & Mean & Med & Min & Max & Std. Dev. & Skew. & Kurt. & JB Test & ADF Test \
 }
 
 
-sink("./table_txt/desc_table.txt")   # start writing file
+sink(ret_desc_stat_sink)   # start writing file
 desc_make_latex_table(tab_print)
 sink()     # close
 
 
 # ---- optim result ----
-
-path_up_optim_result <- "./result/up_tail/optim_result"
-path_down_optim_result <- "./result/down_tail/optim_result"
 
 latex_sci <- function(x, digits = 2) {
   if (is.na(x)) return("")
@@ -259,7 +267,7 @@ optim_result_build_row_from_file <- function(file) {
 
 optim_result_make_latex_table <- function(
     folder,
-    caption = "Estimation results of the uPoT model",
+    caption = "Estimation Results of the uPoT Model",
     label   = "tab:tail_uPot"
 ) {
   files <- list.files(folder, pattern = "\\.RData$", full.names = TRUE)
@@ -328,11 +336,11 @@ Coin
 cat(header, paste(row_lines, collapse = "\n"), "\n", footer, sep = "")
 }
 
-sink("./table_txt/up_optim_result_table.txt")
+sink(up_optim_result_sink)
 optim_result_make_latex_table(path_up_optim_result)
 sink()
 
-sink("./table_txt/down_optim_result_table.txt")
+sink(down_optim_result_sink)
 optim_result_make_latex_table(path_down_optim_result)
 sink()
 
@@ -340,7 +348,7 @@ sink()
 
 dca_table_to_latex <- function(dca,
                                digits  = 2,
-                               caption = "Volatility spillover table.",
+                               caption = "Volatility Spillover Table.",
                                label   = "tab:spillover",
                                from_col_name = "FROM",
                                to_row_name   = "TO",
@@ -545,13 +553,13 @@ dca_table_to_latex <- function(dca,
   cat(paste(lines, collapse = "\n"))
 }
 
-load("./result/DY/dca.RData")
+load(dca_path)
 
-sink("./table_txt/spillover_down_table.txt")
+sink(spillover_down_sink)
 dca_table_to_latex(dca_down)
 sink()
 
-sink("./table_txt/spillover_up_table.txt")
+sink(spillover_up_sink)
 dca_table_to_latex(dca_up)
 sink()
 

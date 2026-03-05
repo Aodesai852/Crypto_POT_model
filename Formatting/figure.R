@@ -1,5 +1,5 @@
 rm(list=ls())
-setwd("D:/MyFiles/EVT/BTC_POT/code/table")
+setwd("D:/MyFiles/EVT/Crypto_POT")
 
 generate_latex_images <- function(folder) {
   
@@ -47,26 +47,26 @@ generate_latex_images <- function(folder) {
 
 
 
-sink("../table_txt/tail_index_images.txt")
-generate_latex_images("../result/down_tail/P_xi_exc")
-generate_latex_images("../result/down_tail/P_std_sigma")
-generate_latex_images("../result/up_tail/P_xi_exc")
-generate_latex_images("../result/up_tail/P_std_sigma")
+sink("./table_txt/tail_index_images.txt")
+generate_latex_images("./result/POT/percent95/down_tail/P_xi_exc")
+generate_latex_images("./result/POT/percent95/down_tail/P_std_sigma")
+generate_latex_images("./result/POT/percent95/up_tail/P_xi_exc")
+generate_latex_images("./result/POT/percent95/up_tail/P_std_sigma")
 sink()
 
-sink("../table_txt/up_NET_plot.txt")
-generate_latex_images("../result/up_tail/NET_plots")
+sink("./table_txt/up_NET_plot.txt")
+generate_latex_images("./result/DY/percent95win200/NET_plot_up")
 sink()
 
-sink("../table_txt/down_NET_plot.txt")
-generate_latex_images("../result/down_tail/NET_plots")
+sink("./table_txt/down_NET_plot.txt")
+generate_latex_images("./result/DY/percent95win200/NET_plot_down")
 sink()
 
-sink("../table_txt/price_plot.txt")
-generate_latex_images("../result/price_plot")
+sink("./table_txt/price_plot.txt")
+generate_latex_images("./result/POT/percent95/price_plot")
 sink()
 
-sink("../table_txt/return_plot.txt")
-generate_latex_images("../result/return_plot")
+sink("./table_txt/return_plot.txt")
+generate_latex_images("./result/POT/percent95/return_plot")
 sink()
 
